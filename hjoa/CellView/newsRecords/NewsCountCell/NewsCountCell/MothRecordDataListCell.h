@@ -1,0 +1,17 @@
+//
+//  MothRecordDataListCell.h
+//  hjoa
+//
+//  Created by 华剑 on 2017/11/4.
+//  Copyright © 2017年 huajian. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+@interface MothRecordDataListCell : UITableViewCell
+
+- (void)refreshUIWithData:(NSDictionary *)data;
+
+@property (strong, nonatomic) NSString *type;
+
+@end

@@ -1,0 +1,24 @@
+//
+//  CCSPCell.h
+//  hjoa
+//
+//  Created by 华剑 on 2017/8/10.
+//  Copyright © 2017年 huajian. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+#import "CCSPModel.h"
+
+@protocol passCCSPCellHeight <NSObject>
+
+- (void)passHeightFromCCSPCell:(CGFloat)height;
+
+@end
+@interface CCSPCell : UITableViewCell
+
+- (void)creatCCSPApproveUIWithModel:(CCSPModel *)model;
+
+// 确定cell高度 返还给TableView
+@property (weak, nonatomic) id<passCCSPCellHeight> passHeightDelegate;
+
+@end

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="choosePjtCell" id="KGk-i7-Jjw" customClass="ChooseProjectCell">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="项目名称" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G4k-HS-SJa">
+                        <rect key="frame" x="8" y="8" width="75" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="75" id="h4Z-mt-KLr"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="record_but.png" translatesAutoresizingMaskIntoConstraints="NO" id="aUx-Ay-eCh">
+                        <rect key="frame" x="386" y="15" width="20" height="20"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="20" id="Tei-l7-8bJ"/>
+                        </constraints>
+                    </imageView>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YTY-OP-GG3">
+                        <rect key="frame" x="91" y="10" width="294" height="30"/>
+                        <state key="normal" title="Button">
+                            <color key="titleColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        </state>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="aUx-Ay-eCh" secondAttribute="bottom" constant="7" id="0fz-fd-tAW"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="YTY-OP-GG3" secondAttribute="bottom" constant="2" id="1Ye-CB-Ag8"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="G4k-HS-SJa" secondAttribute="leading" id="6Xn-oq-H3k"/>
+                    <constraint firstItem="aUx-Ay-eCh" firstAttribute="leading" secondItem="YTY-OP-GG3" secondAttribute="trailing" constant="1" id="BqI-OG-vMI"/>
+                    <constraint firstAttribute="topMargin" secondItem="G4k-HS-SJa" secondAttribute="top" id="CHp-5H-38N"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="aUx-Ay-eCh" secondAttribute="trailing" id="HVm-lH-QpK"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="G4k-HS-SJa" secondAttribute="bottom" constant="4" id="PiR-hf-SWu"/>
+                    <constraint firstItem="YTY-OP-GG3" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="UuR-6w-olx"/>
+                    <constraint firstItem="aUx-Ay-eCh" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="7" id="hv6-43-LY9"/>
+                    <constraint firstItem="YTY-OP-GG3" firstAttribute="leading" secondItem="G4k-HS-SJa" secondAttribute="trailing" constant="8" id="vF8-Ll-WQY"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="chooseBut" destination="YTY-OP-GG3" id="WiN-zC-W95"/>
+                <outlet property="name" destination="G4k-HS-SJa" id="7g2-Cb-ElO"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="record_but.png" width="25" height="25"/>
+    </resources>
+</document>

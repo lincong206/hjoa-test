@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="calenderPersonCell" id="KGk-i7-Jjw" customClass="CalenderPersonCell">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="60"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="59.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kMb-jX-Ck4">
+                        <rect key="frame" x="10" y="10" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="rjI-JX-DCV"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UGT-Au-8us">
+                        <rect key="frame" x="58" y="18" width="85" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="85" id="veU-3U-3xi"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MSh-1x-3Pp">
+                        <rect key="frame" x="226" y="17" width="180" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="180" id="qOb-9N-DAm"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="UGT-Au-8us" secondAttribute="bottom" constant="8.5" id="1dj-Kz-VF5"/>
+                    <constraint firstItem="MSh-1x-3Pp" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="9" id="3hR-CI-SWK"/>
+                    <constraint firstItem="UGT-Au-8us" firstAttribute="leading" secondItem="kMb-jX-Ck4" secondAttribute="trailing" constant="8" id="CAj-Pw-4c3"/>
+                    <constraint firstItem="kMb-jX-Ck4" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="2" id="Owu-XE-6ks"/>
+                    <constraint firstItem="kMb-jX-Ck4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="2" id="XvL-lE-vbZ"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="MSh-1x-3Pp" secondAttribute="trailing" id="Zqa-ja-RLu"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="kMb-jX-Ck4" secondAttribute="bottom" constant="1.5" id="jS6-au-dgB"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="MSh-1x-3Pp" secondAttribute="bottom" constant="9.5" id="uS2-In-Ic3"/>
+                    <constraint firstItem="UGT-Au-8us" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="10" id="z72-mS-RST"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="date" destination="MSh-1x-3Pp" id="oe3-Tf-C4O"/>
+                <outlet property="headImage" destination="kMb-jX-Ck4" id="2ie-Rk-gPn"/>
+                <outlet property="name" destination="UGT-Au-8us" id="ebT-sZ-M4i"/>
+            </connections>
+            <point key="canvasLocation" x="-119" y="-31"/>
+        </tableViewCell>
+    </objects>
+</document>
