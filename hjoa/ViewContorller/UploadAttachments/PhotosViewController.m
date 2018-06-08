@@ -121,13 +121,17 @@
         model.select = !model.select;
         [self.selectIndexs removeObject:model];
     }else {                 // 未选中  -> 选中
-        // 只显示9个图
-        if (self.selectIndexs.count < 9) {
+        if (self.isMSelect) {
             model.select = !model.select;
             [self.selectIndexs addObject:model];
+        }else {
+            // 只显示9个图
+            if (self.selectIndexs.count < 9) {
+                model.select = !model.select;
+                [self.selectIndexs addObject:model];
+            }
         }
     }
-
     _isRefresh = true;
     // 刷新选择图标
     [self.PhotosCollection reloadData];

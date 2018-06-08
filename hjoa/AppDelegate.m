@@ -21,7 +21,6 @@
 #import "WXApi.h"
 
 #import "DindingQQAndWXView.h"
-#import "GSKeyChainDataManager.h"
 
 //#import <HyphenateLite/>
 
@@ -36,10 +35,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    
-    // 存入UUID到钥匙串  (考勤防作弊需求)
-//    NSString *deviceUUID = [[UIDevice currentDevice].identifierForVendor UUIDString];
-//    [GSKeyChainDataManager saveUUID:deviceUUID];
     
     // 百度地图SDK
     _mapManager = [[BMKMapManager alloc] init];

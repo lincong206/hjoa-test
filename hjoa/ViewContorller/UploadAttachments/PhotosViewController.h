@@ -16,7 +16,7 @@
 @interface PhotosViewController : UIViewController
 
 @property (strong, nonatomic) NSMutableArray *data;
-
+@property (assign, nonatomic) BOOL isMSelect;   //是否可以选择超过九张
 @property (weak, nonatomic) id<passSelectPhotos> passDelegate;
 
 @end

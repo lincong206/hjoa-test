@@ -40,10 +40,12 @@
 {
     if (indexPath.row == 0) {
         ContentFristCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cfCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell refreContentFristCellDataWithModel:self.dataSource[indexPath.row]];
         return cell;
     }else {
         ContentCell *cell = [tableView dequeueReusableCellWithIdentifier:@"contentCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         [cell refreContentCellDataWithModel:self.dataSource[indexPath.row]];
         return cell;
     }

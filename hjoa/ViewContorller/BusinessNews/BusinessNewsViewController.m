@@ -164,6 +164,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BusinessNewsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"bcCell" forIndexPath:indexPath];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     if (self.dataSource.count) {
         [self.activity stopAnimating];
         self.activityView.hidden = YES;

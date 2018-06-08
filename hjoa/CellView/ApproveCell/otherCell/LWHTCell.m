@@ -1,15 +1,15 @@
 //
-//  JCBGCell.m
+//  LWHTCell.m
 //  hjoa
 //
-//  Created by 华剑 on 2017/12/13.
-//  Copyright © 2017年 huajian. All rights reserved.
+//  Created by 华剑 on 2018/6/7.
+//  Copyright © 2018年 huajian. All rights reserved.
 //
 
-#import "JCBGCell.h"
+#import "LWHTCell.h"
 #import "Header.h"
 
-@interface JCBGCell ()
+@interface LWHTCell ()
 {
     UIFont *_fnt;
     NSInteger _shang;
@@ -18,22 +18,19 @@
     CGSize _titleSize;
     CGSize _size;
     NSInteger _count;
-    
-    NSString *_name;
 }
 @property (strong, nonatomic) UILabel *noteLabel;
 @property (strong, nonatomic) UILabel *titleLabel;
 @property (strong, nonatomic) NSArray *titleArr;
-
 @end
 
-@implementation JCBGCell
+@implementation LWHTCell
 
-- (void)creatJCBGApproveUIWithModel:(JCBGModel *)model
+- (void)creatLWHTApproveUIWithModel:(LWHTModel *)model
 {
-    _titleArr = @[@"检查报告编号",@"检查报告人",@"检查日期",@"项目名称",@"合同总金额",
-                  @"项目地址",@"合同编号",@"开工日期",@"竣工日期",@"结果状态",
-                  @"检查性质",@"检查报告内容",@"报告结果"];
+    _titleArr = @[@"工程名称",@"项目编号",@"合同名称",@"合同金额",@"工期",
+                  @"劳务公司",@"联系方式",@"劳务班组",@"管理费",@"质保金",
+                  @"保险费",@"保险合同额",@"施工内容",@"付款方式"];
     _fnt = [UIFont systemFontOfSize:15];
     _titleHeight = 0;
     _noteHeight = 0;
@@ -57,71 +54,53 @@
         [self creatTextViewWithModel:model andLabel:_noteLabel andCount:i andTitleLabel:_titleLabel andTitleSize:_titleSize];
     }
 }
-
-- (void)creatTextViewWithModel:(JCBGModel *)model andLabel:(UILabel *)label andCount:(int)count andTitleLabel:(UILabel *)titleLabel andTitleSize:(CGSize )titleSize
+- (void)creatTextViewWithModel:(LWHTModel *)model andLabel:(UILabel *)label andCount:(int)count andTitleLabel:(UILabel *)titleLabel andTitleSize:(CGSize )titleSize
 {
     titleLabel.text = _titleArr[count];
     _titleSize = [titleLabel.text sizeWithAttributes:[NSDictionary dictionaryWithObjectsAndKeys:_fnt,NSFontAttributeName, nil]];
     
     switch (label.tag) {
-        case 200:           //  检查报告编号
-            label.text = model.birIdnum;
-            break;
-        case 201:           //  检查报告人
-            label.text = model.birEntryperson;
-            break;
-        case 202:           //  检查日期
-            label.text = [model.birTime componentsSeparatedByString:@" "].firstObject;
-            break;
-        case 203:           //  项目名称
+        case 200:           //  项目名称
             label.text = model.piName;
             break;
-        case 204:           //  合同总金额
-            label.text = [NSString stringWithFormat:@"%@",model.bpcSupplyfee];
+        case 201:           //  项目编号
+            label.text = model.piIdnum;
             break;
-        case 205:           //  项目地址
-            label.text = [NSString stringWithFormat:@"%@%@",model.piAddresspca,model.piAdress];
+        case 202:           //  合同名称
+            label.text = model.laContractname;
             break;
-        case 206:           //  合同编号
-            label.text = model.bpcRealcontractid;
+        case 203:           //  合同金额
+            label.text = [NSString stringWithFormat:@"%@",model.laContractmoney];
             break;
-        case 207:           //  开工日期
-            label.text = model.bpcStartdate;
+        case 204:           //  工期
+            label.text = model.laWorkingtime;
             break;
-        case 208:           //  竣工日期
-            label.text = model.bpcWorkeddate;
+        case 205:           //  劳务公司
+            label.text = model.laLabourcompany;
             break;
-        case 209:           //  结果状态
-            if (model.birResultstate.integerValue == 0) {
-                label.text = @"通过";
-            }else if (model.birResultstate.integerValue == 1) {
-                label.text = @"口头警告";
-            }else {
-                label.text = @"书面整改";
-            }
+        case 206:           //  联系方式
+            label.text = model.laPhone;
             break;
-        case 210:           //  检查性质
-            if (model.birExamined.integerValue == 0) {
-                label.text = @"月度检查";
-            }else if (model.birExamined.integerValue == 1) {
-                label.text = @"季度检查";
-            }else if (model.birExamined.integerValue == 2) {
-                label.text = @"专项检查";
-            }else if (model.birExamined.integerValue == 3) {
-                label.text = @"节后复工检查";
-            }else if (model.birExamined.integerValue == 4) {
-                label.text = @"项目部检查";
-            }else if (model.birExamined.integerValue == 5) {
-                label.text = @"分公司检查";
-            }else {
-                label.text = @"";
-            }
+        case 207:           //  劳务班组
+            label.text = model.laLabourteam;
             break;
-        case 211:           //  检查报告内容
-            label.text = model.birContent;
+        case 208:           //  管理费
+            label.text = [NSString stringWithFormat:@"%@",model.laManagemoney];
             break;
-        case 212:           //  竣工日期
-            label.text = model.birInspectionresult;
+        case 209:           //  质保金
+            label.text = [NSString stringWithFormat:@"%@",model.laQualitymoney];
+            break;
+        case 210:           //  保险费
+            label.text = [NSString stringWithFormat:@"%@",model.laLnsurance];
+            break;
+        case 211:           //  保险合同额
+            label.text = [NSString stringWithFormat:@"%@",model.laLnsurancecontract];
+            break;
+        case 212:           //  施工内容
+            label.text = model.laWorkecontract;
+            break;
+        case 213:           //  付款方式
+            label.text = model.laPayway;
             break;
         default:
             break;
@@ -166,7 +145,7 @@
     [self.contentView addSubview:label];
     
     if (count == _titleArr.count - 1) {
-        [self.passHeightDelegate passHeightFromJCBG:_noteHeight + 10];
+        [self.passHeightDelegate passHeightFromLWHT:_noteHeight + 10];
     }
 }
 

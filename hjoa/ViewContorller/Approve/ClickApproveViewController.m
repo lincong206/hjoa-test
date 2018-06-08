@@ -37,6 +37,7 @@
 #import "JYCWZLModel.h"
 #import "YHKHModel.h"
 #import "LWFBHTModel.h"
+#import "LWHTModel.h"
 // 项目相关申请
 #import "XMBXModel.h"
 #import "XMBZJModel.h"
@@ -104,6 +105,13 @@
 #import "DAMModel.h"
 
 #import "ZYLKModel.h"
+#import "LWJDKModel.h"
+#import "LWJSKModel.h"
+#import "KPModel.h"
+#import "KPListModel.h"
+#import "SPModel.h"
+#import "SPListModel.h"
+#import "NKDJModel.h"
 
 // Cell
 #import "XMTableViewCell.h"
@@ -189,16 +197,26 @@
 #import "JCBGCell.h"
 #import "DAMCell.h"
 #import "LWFBHTCell.h"
+#import "LWHTCell.h"
 
 #import "ZYLKCell.h"
+#import "NowPhotosCell.h"
+#import "LWJDKCell.h"
+#import "LWJSKCell.h"
+#import "KPCell.h"
+#import "KPListCell.h"
+#import "SPCell.h"
+#import "SPListCell.h"
+#import "NKDJCell.h"
 
-@interface ClickApproveViewController () <UITableViewDelegate, UITableViewDataSource, changeApproveHeightDelegate, passButStatuDelegate, ApproveEnclosureCellDelegate, passHeightFromXMCell, passTBBHAndXMBHCellHeight, passHTYYCellHeight, passSWWJAndGCLWJCellHeight, passXMBZJCellHeight,passTXMBZJCellHeight, passTBBZJCellHeight, passTTBBZJCellHeight, passFPSJCellHeight, passYBBXCellHeight,passJSXCellHeight, passWTSCellHeight, passYBJKSQCellHeight, passXMFZRCellHeight, passXMKZCellHeight,passZMSCellHeight, passBSJJCellHeight, passXMTBPSHeight, passJYCWZLCellHeight, passXMBXCellHeight,passXMZJSQCellHeight,passWJZCellHeight,passLKDJCellHeight, passBFHQDCellHeight,passLWFKCellHeight, passXMDFCellHeight, passJKBXCellHeight, passJKSQCellHeight, passLwClCellHeight, passLKCellHeight, passCostCellHeight, passCCSPCellHeight, passYZHSCellHeight, passCFSPCellHeight, passGCYWCCCellHeight, passIDQXCellHeight, passIDZKCellHeight, passQJCellHeight, passRSXQCellHeight, passSBGJJCellHeight, passPXSPCellHeight, passJSJSBCellHeight, passWPCellHeight, passWPDHMCellHeight, passERPLCBGCellHeight, passJSCYLYCellHeight, passHTSPCellHeight, passJDCellHeight, passYWCCCellHeight, passMPCellHeight, passYPSGCellHeight, passRSLHCellHeight, passYZWCCellHeight, passZBCellHeight, passFWGZCellHeight, passSGCellHeight, passSJCellHeight, passHYJYCellHeight, passCLCGFKCellHeight, passCGHTCellHeight, passXMYSCellHeight, passHTBGCellHeight, passBCHTCellHeight, passBCHTHeight, passFWGZHeight, passTBCHCellHeight, passTBCHHeight, passYHKHHeight, passBXMXHeight, passAPCellHeight, refreApproveCellStatus, passZBDLHeight, passDKBKSQHeight, passJCBGHeight, passDAMHeight, passZYLKCellHeight, passYCGZCellHeight, passLWFBHTHeight>
+@interface ClickApproveViewController () <UITableViewDelegate, UITableViewDataSource, changeApproveHeightDelegate, passButStatuDelegate, ApproveEnclosureCellDelegate, passHeightFromXMCell, passTBBHAndXMBHCellHeight, passHTYYCellHeight, passSWWJAndGCLWJCellHeight, passXMBZJCellHeight,passTXMBZJCellHeight, passTBBZJCellHeight, passTTBBZJCellHeight, passFPSJCellHeight, passYBBXCellHeight,passJSXCellHeight, passWTSCellHeight, passYBJKSQCellHeight, passXMFZRCellHeight, passXMKZCellHeight,passZMSCellHeight, passBSJJCellHeight, passXMTBPSHeight, passJYCWZLCellHeight, passXMBXCellHeight,passXMZJSQCellHeight,passWJZCellHeight,passLKDJCellHeight, passBFHQDCellHeight,passLWFKCellHeight, passXMDFCellHeight, passJKBXCellHeight, passJKSQCellHeight, passLwClCellHeight, passLKCellHeight, passCostCellHeight, passCCSPCellHeight, passYZHSCellHeight, passCFSPCellHeight, passGCYWCCCellHeight, passIDQXCellHeight, passIDZKCellHeight, passQJCellHeight, passRSXQCellHeight, passSBGJJCellHeight, passPXSPCellHeight, passJSJSBCellHeight, passWPCellHeight, passWPDHMCellHeight, passERPLCBGCellHeight, passJSCYLYCellHeight, passHTSPCellHeight, passJDCellHeight, passYWCCCellHeight, passMPCellHeight, passYPSGCellHeight, passRSLHCellHeight, passYZWCCellHeight, passZBCellHeight, passFWGZCellHeight, passSGCellHeight, passSJCellHeight, passHYJYCellHeight, passCLCGFKCellHeight, passCGHTCellHeight, passXMYSCellHeight, passHTBGCellHeight, passBCHTCellHeight, passBCHTHeight, passFWGZHeight, passTBCHCellHeight, passTBCHHeight, passYHKHHeight, passBXMXHeight, passAPCellHeight, refreApproveCellStatus, passZBDLHeight, passDKBKSQHeight, passJCBGHeight, passDAMHeight, passZYLKCellHeight, passYCGZCellHeight, passLWFBHTHeight, passLWJDKCellHeight, passLWJSKCellHeight, passKPCellHeight, passSPCellHeight, passLWHTHeight, passNKDJCellHeight>
 {
     NSDictionary *_paras;       // 材料
     NSString *_url;
     NSString *_urlParameter1 ;
     NSString *_urlParameter2;
     NSString *_urlParameter3;
+    NSInteger _shang; // 计算九宫格高度参数
 }
 @property (strong, nonatomic) AFHTTPSessionManager *manager;
 @property (strong, nonatomic) UIActivityIndicatorView *activity;
@@ -222,16 +240,22 @@
 
 @property (strong, nonatomic) NSString *status;
 @property (strong, nonatomic) ApprovalOpinionsViewController *aoVC;
-
 @property (strong, nonatomic) ApproveButView *ABView;
-
 @property (strong, nonatomic) NSString *mctId;          // 预付款明细参数
-
 @property (assign, nonatomic) NSInteger butStatus;
+@property (strong, nonatomic) NSMutableArray *nowPhotos;    // 现场照片，九宫格显示
 
 @end
 
 @implementation ClickApproveViewController
+
+- (NSMutableArray *)nowPhotos
+{
+    if (!_nowPhotos) {
+        _nowPhotos = [NSMutableArray array];
+    }
+    return _nowPhotos;
+}
 
 - (AFHTTPSessionManager *)manager
 {
@@ -392,9 +416,12 @@
     [self.activity startAnimating];
     _activityView.hidden = NO;
     
-    _ApproveTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kscreenWidth, kscreenHeight-64) style:UITableViewStylePlain];
+    _ApproveTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, kscreenWidth, kscreenHeight-64-56) style:UITableViewStylePlain];
     _ApproveTable.delegate = self;
     _ApproveTable.dataSource = self;
+    _ApproveTable.estimatedRowHeight = 0;
+    _ApproveTable.estimatedSectionHeaderHeight = 0;
+    _ApproveTable.estimatedSectionFooterHeight = 0;
     [self.view addSubview:_ApproveTable];
     
     // 申明Cell
@@ -413,6 +440,8 @@
     [_ApproveTable registerNib:[UINib nibWithNibName:@"ApproveProcedureCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"apCell"];
     // 审批附件Cell
     [_ApproveTable registerNib:[UINib nibWithNibName:@"ApproveEnclosureCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"aeCell"];
+    // 九宫格显示图片
+    [_ApproveTable registerNib:[UINib nibWithNibName:@"NowPhotosCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"nowPhotosCell"];
     // XM   Cell                                // 项目立项
     if ([_model.piType isEqualToString:@"XM"]) {
         [_ApproveTable registerNib:[UINib nibWithNibName:@"XMTableViewCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"xmCell"];
@@ -562,8 +591,9 @@
         [_ApproveTable registerNib:[UINib nibWithNibName:@"HYJYCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"hyjyCell"];
     }
     // 周报
-    if ([_model.piType isEqualToString:@"WDZB"] || [_model.piType isEqualToString:@"ZBSPL"]) {
+    if ([_model.piType isEqualToString:@"ZBSPL"]) {
         [_ApproveTable registerNib:[UINib nibWithNibName:@"ZBCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"zbCell"];
+        [_ApproveTable registerNib:[UINib nibWithNibName:@"NowPhotosCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"nowPhotosCell"];
     }
     // 法务跟踪
     if ([_model.piType isEqualToString:@"FWGZ"]) {
@@ -715,7 +745,7 @@
     if ([_model.piType isEqualToString:@"ZYLK"]) {
         [_ApproveTable registerNib:[UINib nibWithNibName:@"ZYLKCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"zylkCell"];
     }
-    // 项目管控 -> 收款详情
+    // 负责人违规
     if ([_model.piType isEqualToString:@"YCGZ"]) {
         [_ApproveTable registerNib:[UINib nibWithNibName:@"YCGZCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"ycgzCell"];
     }
@@ -723,7 +753,32 @@
     if ([_model.piType isEqualToString:@"LWFBHT"]) {
         [_ApproveTable registerNib:[UINib nibWithNibName:@"LWFBHTCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"lwfbhtCell"];
     }
-    
+    // 劳务合同 (营联)
+    if ([_model.piType isEqualToString:@"LWHT"]) {
+        [_ApproveTable registerNib:[UINib nibWithNibName:@"LWHTCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"lwhtCell"];
+    }
+    // 劳务进度款
+    if ([_model.piType isEqualToString:@"LWJDK"]) {
+        [_ApproveTable registerNib:[UINib nibWithNibName:@"LWJDKCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"lwjdkCell"];
+    }
+    // 劳务结算款
+    if ([_model.piType isEqualToString:@"LWJSK"]) {
+        [_ApproveTable registerNib:[UINib nibWithNibName:@"LWJSKCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"lwjskCell"];
+    }
+    // 开票
+    if ([_model.piType isEqualToString:@"KP"]) {
+        [_ApproveTable registerNib:[UINib nibWithNibName:@"KPCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"kpCell"];
+        [_ApproveTable registerNib:[UINib nibWithNibName:@"KPListCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"kpListCell"];
+    }
+    // 收票
+    if ([_model.piType isEqualToString:@"SPGL"]) {
+        [_ApproveTable registerNib:[UINib nibWithNibName:@"SPCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"spCell"];
+        [_ApproveTable registerNib:[UINib nibWithNibName:@"SPListCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"spListCell"];
+    }
+    // 诺款登记
+    if ([_model.piType isEqualToString:@"NKDJ"]) {
+        [_ApproveTable registerNib:[UINib nibWithNibName:@"NKDJCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"nkdjCell"];
+    }
 }
 
 // 检查网络状态
@@ -810,6 +865,7 @@
     }else if ([_model.piType isEqualToString:@"YXBB"]) {
         self.isLoad = true;
     }
+    
 }
 
 //投标策划
@@ -988,7 +1044,7 @@
         _urlParameter1 = @"oaMeetingService";
         _urlParameter2 = @"findById";
         _urlParameter3 = @"msId";
-    } else if ([_model.piType isEqualToString:@"WDZB"] || [_model.piType isEqualToString:@"ZBSPL"]) {  //  周报
+    } else if ([_model.piType isEqualToString:@"ZBSPL"]) {  //  周报
         _urlParameter1 = @"PaWeekly";
         _urlParameter2 = @"queryByWkIdDpe";
         _urlParameter3 = @"wkId";
@@ -996,11 +1052,11 @@
         _urlParameter1  = @"mcMaterialPayment";
         _urlParameter2 = @"findById";
         _urlParameter3 = @"mpId";
-    } else if ([_model.piType isEqualToString:@"CGHT"]) { //材料合同
+    } else if ([_model.piType isEqualToString:@"CGHT"]) { //材料合同    (申请零星材料付款)
         _urlParameter1  = @"mcMaterialContract";
         _urlParameter2 = @"findById";
         _urlParameter3 = @"mctId";
-    } else if ([_model.piType isEqualToString:@"XMYS"]) { //劳务合同
+    } else if ([_model.piType isEqualToString:@"XMYS"]) { //项目预审
         _urlParameter1  = @"bsProjectPre";
         _urlParameter2 = @"findPreAndEnrollAndInfo";
         _urlParameter3 = @"piId";
@@ -1126,7 +1182,6 @@
         _urlParameter2 = @"query";
         _urlParameter3 = @"dsgaId";
     }
-
     else if ([_model.piType isEqualToString:@"ZYLK"]) { //付款详情
         _urlParameter1 = @"rsSelfPayeeRecord";
         _urlParameter2 = @"findBysprId";
@@ -1135,6 +1190,30 @@
         _urlParameter1 = @"rsLabourcontract";
         _urlParameter2 = @"findById";
         _urlParameter3 = @"rlcId";
+    } else if ([_model.piType isEqualToString:@"LWHT"]) { // 劳务合同 (营联)
+        _urlParameter1 = @"rsServiceContract";
+        _urlParameter2 = @"findById";
+        _urlParameter3 = @"laId";
+    } else if ([_model.piType isEqualToString:@"LWJDK"]) { // 劳务进度款
+        _urlParameter1 = @"rsLabourpayment";
+        _urlParameter2 = @"findByIdInfo";
+        _urlParameter3 = @"rlpId";
+    } else if ([_model.piType isEqualToString:@"LWJSK"]) { // 劳务结算款
+        _urlParameter1 = @"rsLaboursetpayment";
+        _urlParameter2 = @"findByIdInfo";
+        _urlParameter3 = @"rspId";
+    } else if ([_model.piType isEqualToString:@"KP"]) { // 开票
+        _urlParameter1 = @"fnOpenInvoice";
+        _urlParameter2 = @"findByoiIdInfo";
+        _urlParameter3 = @"oiId";
+    } else if ([_model.piType isEqualToString:@"SPGL"]) { // 收票
+        _urlParameter1 = @"fnOpenInvoice";
+        _urlParameter2 = @"findByBillInfo";
+        _urlParameter3 = @"oiId";
+    } else if ([_model.piType isEqualToString:@"NKDJ"]) { // 诺款登记
+        _urlParameter1 = @"rsEmbezzleMoneyRecord";
+        _urlParameter2 = @"findByemId";
+        _urlParameter3 = @"emId";
     }
 
     _url = [NSString stringWithFormat:@"%@/%@/%@?%@=%@",intranetURL,_urlParameter1,_urlParameter2,_urlParameter3,_model.piId];
@@ -1372,7 +1451,7 @@
                         [JKSQ setValuesForKeysWithDictionary:dic];
                         [self.data addObject:JKSQ];
                     }
-                } else if ([_model.piType isEqualToString:@"WDZB"] || [_model.piType isEqualToString:@"ZBSPL"]) { //周报
+                } else if ([_model.piType isEqualToString:@"ZBSPL"]) { //周报
                     for (NSDictionary *dic in responseObject[@"rows"]) {
                         ZBModel *ZB = [[ZBModel alloc] init];
                         [ZB setValuesForKeysWithDictionary:dic];
@@ -1455,7 +1534,7 @@
                         [DKBK setValuesForKeysWithDictionary:dic];
                         [self.data addObject:DKBK];
                     }
-                }else if ([_model.piType isEqualToString:@"JCBG"]) {    //检查报告
+                }else if ([_model.piType isEqualToString:@"JCBG"]) {    //检查报告  birExamined
                     for (NSDictionary *dic in responseObject[@"rows"]) {
                         JCBGModel *JCBG = [[JCBGModel alloc] init];
                         [JCBG setValuesForKeysWithDictionary:dic];
@@ -1630,6 +1709,55 @@
                     LWFBHTModel *LWFBHT = [[LWFBHTModel alloc] init];
                     [LWFBHT setValuesForKeysWithDictionary:responseObject[@"rows"]];
                     [self.data addObject:LWFBHT];
+                }else if ([_model.piType isEqualToString:@"LWHT"]) { //劳务合同
+                    for (NSDictionary *dic in responseObject[@"rows"]) {
+                        LWHTModel *LWHT = [[LWHTModel alloc] init];
+                        [LWHT setValuesForKeysWithDictionary:dic];
+                        [self.data addObject:LWHT];
+                    }
+                }else if ([_model.piType isEqualToString:@"LWJDK"]) { //劳务进度款
+                    LWJDKModel *LWJDK = [[LWJDKModel alloc] init];
+                    [LWJDK setValuesForKeysWithDictionary:responseObject[@"rows"]];
+                    [LWJDK setValuesForKeysWithDictionary:responseObject[@"rows"] [@"rsLabourcontract"]];
+                    [self.data addObject:LWJDK];
+                }else if ([_model.piType isEqualToString:@"LWJSK"]) { //劳务结算款
+                    LWJSKModel *LWJSK = [[LWJSKModel alloc] init];
+                    [LWJSK setValuesForKeysWithDictionary:responseObject[@"rows"]];
+                    [LWJSK setValuesForKeysWithDictionary:responseObject[@"rows"] [@"rsLabourcontract"]];
+                    [self.data addObject:LWJSK];
+                }else if ([_model.piType isEqualToString:@"KP"]) { //开票
+                    for (NSDictionary *dic in responseObject[@"rows"][@"detailList"]) {
+                        KPListModel *kpList = [[KPListModel alloc] init];
+                        [kpList setValuesForKeysWithDictionary:dic];
+                        [self.xmProject addObject:kpList];
+                    }
+                    KPModel *KP = [[KPModel alloc] init];
+                    [KP setValuesForKeysWithDictionary:responseObject[@"rows"]];
+                    [KP setValuesForKeysWithDictionary:responseObject[@"rows"] [@"oaBillAndReceipt"]];
+                    [self.data addObject:KP];
+                }else if ([_model.piType isEqualToString:@"SPGL"]) { //收票
+                    // 基本
+                    SPModel *SP = [[SPModel alloc] init];
+                    SP.oiOthers = responseObject[@"rows"] [@"oiOthers"];
+                    SP.oiOtheres = responseObject[@"rows"] [@"oiOtheres"];
+                    if ([SP.oiOtheres isEqualToString:@"LWHT"]) {
+                        [SP setValuesForKeysWithDictionary:responseObject[@"rows"] [@"rsLabourcontract"]];
+                    }else {
+                        [SP setValuesForKeysWithDictionary:responseObject[@"rows"] [@"mcMaterialcontract"]];
+                    }
+                    [self.data addObject:SP];
+                    // 详情
+                    for (NSDictionary *dic in responseObject[@"rows"] [@"fnList"]) {
+                        SPListModel *spListmodel = [[SPListModel alloc] init];
+                        [spListmodel setValuesForKeysWithDictionary:dic];
+                        [self.xmProject addObject:spListmodel];
+                    }
+                }else if ([_model.piType isEqualToString:@"NKDJ"]) { //诺款登记
+                    for (NSDictionary *dic in responseObject[@"rows"]) {
+                        NKDJModel *NKDJ = [[NKDJModel alloc] init];
+                        [NKDJ setValuesForKeysWithDictionary:dic];
+                        [self.data addObject:NKDJ];
+                    }
                 }
             }
             [self.ApproveTable reloadData];
@@ -1648,7 +1776,7 @@
 {
     _url = [NSString stringWithFormat:@"%@/mcMaterialContract/findById?mctId=%@",intranetURL,mctId];
     [self.manager POST:_url parameters:nil progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-        
+        NSLog(@"%@",responseObject);
         if ([responseObject[@"status"] isEqualToString:@"success"]) {
             for (NSDictionary *dic in responseObject[@"rows"]) {
                 [model setValuesForKeysWithDictionary:dic];
@@ -1656,7 +1784,7 @@
         }
         
     } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-        
+        NSLog(@"%@",error);
     }];
 }
 
@@ -1665,9 +1793,7 @@
 {
     if ([_model.piType isEqualToString:@"CLCGFK"]) {
         _url = [NSString stringWithFormat:@"%@/%@/%@?%@=%@&page=1&&rows=15",intranetURL,@"mcPaymentDetailController",@"findBymctIdAndmpId",@"pdMpid",_model.piId];
-    }else if ([_model.piType isEqualToString:@"CLCGYFK"]) {
-        _url = [NSString stringWithFormat:@"%@/%@/%@?%@=%@&page=1&&rows=15",intranetURL,@"mcContractdetail",@"findBymctId",@"mctId",self.mctId];
-    }else if ([_model.piType isEqualToString:@"CGHT"]) {
+    }else if ([_model.piType isEqualToString:@"CLCGYFK"] || [_model.piType isEqualToString:@"CGHT"]) {
         _url = [NSString stringWithFormat:@"%@/%@/%@?%@=%@&page=1&&rows=15",intranetURL,@"mcContractdetail",@"findBymctId",@"mctId",self.mctId];
     }
     
@@ -1757,22 +1883,28 @@
     [parameters setValue:self.model.piId forKey:@"piId"];
     [parameters setValue:self.model.piType forKey:@"piType"];
     
-    if ([_model.piType isEqualToString:@"JCBG"]) {
+    if ([_model.piType isEqualToString:@"JCBG"] || [_model.piType isEqualToString:@"ZBSPL"]) {
         for (int i = 0; i < 2; i ++) {
             if (i == 0) {
-                [self requestSeversWithParameters:parameters];
+                [self requestSeversWithParameters:parameters withIsNow:NO];
             }else {
-                [parameters setValue:[NSString stringWithFormat:@"%@T",self.model.piType] forKey:@"piType"];
-                [self requestSeversWithParameters:parameters];
+                if ([_model.piType isEqualToString:@"JCBG"]) {
+                    // 现场照片
+                    [parameters setValue:[NSString stringWithFormat:@"%@T",self.model.piType] forKey:@"piType"];
+                }else if ([_model.piType isEqualToString:@"ZBSPL"]) {
+                    // 现场照片
+                    [parameters setValue:@"ZBSG" forKey:@"piType"];
+                }
+                [self requestSeversWithParameters:parameters withIsNow:YES];
             }
         }
     }else {
-        [self requestSeversWithParameters:parameters];
+        [self requestSeversWithParameters:parameters withIsNow:NO];
     }
 }
 // 获取附件
 #pragma mark --附件--
-- (void)requestSeversWithParameters:(NSMutableDictionary *)parameters
+- (void)requestSeversWithParameters:(NSMutableDictionary *)parameters withIsNow:(BOOL)isNow
 {
     [self.manager POST:documentsApprove parameters:parameters progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
@@ -1780,7 +1912,20 @@
             for (NSDictionary *dic in responseObject[@"rows"]) {
                 ApproveEnclosureModel *aeModel = [[ApproveEnclosureModel alloc] init];
                 [aeModel setValuesForKeysWithDictionary:dic];
-                [self.EnclosureData addObject:aeModel];
+                if (isNow) {
+                    [self.nowPhotos addObject:aeModel];
+                }else {
+                    [self.EnclosureData addObject:aeModel];
+                }
+            }
+            if (isNow) {
+                if (self.nowPhotos.count) {
+                    if (self.nowPhotos.count%3 == 0) {
+                        _shang = self.nowPhotos.count/3;
+                    }else {
+                        _shang = (NSInteger)(self.nowPhotos.count/3) + 1;
+                    }
+                }
             }
         }
         [self.ApproveTable reloadData];
@@ -1832,17 +1977,17 @@
 {
     if (self.isLoad) {
         if ([_model.piType isEqualToString:@"XMFZR"]) {
-            return 4;
-        }else if ([_model.piType isEqualToString:@"YBBX"]) {
-            return 4;
-        }else if ([_model.piType isEqualToString:@"XMBX"] || [_model.piType isEqualToString:@"JKBX"] || [_model.piType isEqualToString:@"LWFK"] || [_model.piType isEqualToString:@"CLFK"] || [_model.piType isEqualToString:@"LKDJ"] || [_model.piType isEqualToString:@"IDZKSQ"] || [_model.piType isEqualToString:@"CLCGFK"] || [_model.piType isEqualToString:@"CLCGYFK"] || [_model.piType isEqualToString:@"CGHT"] || [_model.piType isEqualToString:@"BCHT"] || [_model.piType isEqualToString:@"TBCH"]) {
-            return 4;
-        }else if ([_model.piType isEqualToString:@"BK"]) {
             return 5;
+        }else if ([_model.piType isEqualToString:@"YBBX"]) {
+            return 5;
+        }else if ([_model.piType isEqualToString:@"XMBX"] || [_model.piType isEqualToString:@"JKBX"] || [_model.piType isEqualToString:@"LWFK"] || [_model.piType isEqualToString:@"CLFK"] || [_model.piType isEqualToString:@"LKDJ"] || [_model.piType isEqualToString:@"IDZKSQ"] || [_model.piType isEqualToString:@"CLCGFK"] || [_model.piType isEqualToString:@"CLCGYFK"] || [_model.piType isEqualToString:@"CGHT"] || [_model.piType isEqualToString:@"BCHT"] || [_model.piType isEqualToString:@"TBCH"] || [_model.piType isEqualToString:@"KP"] || [_model.piType isEqualToString:@"SPGL"]) {
+            return 5;
+        }else if ([_model.piType isEqualToString:@"BK"]) {
+            return 6;
         }else if ([_model.piType isEqualToString:@"FWGZ"]){
-            return 4;
+            return 5;
         }else {
-            return 4;
+            return 5;
         }
     }else {
         return 0;
@@ -1867,7 +2012,13 @@
                 }else {
                     return 50;
                 }
-            }else if (section == 4) {   //  审批流程
+            }else if (section == 4) {   //  现场照片
+                if (self.nowPhotos.count == 0) {
+                    return 0;
+                }else {
+                    return 50;
+                }
+            }else if (section == 5) {   //  审批流程
                 if (self.procedureData.count == 0) {
                     return 0;
                 }else {
@@ -1891,7 +2042,13 @@
                 }else {
                     return 50;
                 }
-            }else if (section == 3) {   //  审批流程
+            }else if (section == 3) {   //  现场照片
+                if (self.nowPhotos.count == 0) {
+                    return 0;
+                }else {
+                    return 50;
+                }
+            }else if (section == 4) {   //  审批流程
                 if (self.procedureData.count == 0) {
                     return 0;
                 }else {
@@ -1915,6 +2072,8 @@
             if (section == 3) {
                 return @"审批附件";
             } else if (section == 4) {
+                return @"现场照片";
+            } else if (section == 5) {
                 return @"审批流程";
             } else if (section == 1) {
                 return @"应扣费用";
@@ -1925,6 +2084,8 @@
             if (section == 2) {
                 return @"审批附件";
             } else if (section == 3) {
+                return @"现场照片";
+            }  else if (section == 4) {
                 return @"审批流程";
             } else if (section == 1) {
                 if ([_model.piType isEqualToString:@"XMFZR"]) {
@@ -1949,6 +2110,8 @@
                     return @"法务追踪";
                 }else if ([_model.piType isEqualToString:@"TBCH"]) {
                     return @"投标策划信息";
+                }else if ([_model.piType isEqualToString:@"KP"] || [_model.piType isEqualToString:@"SPGL"]) {
+                    return @"开票信息";
                 }
                 else {
                     return nil;
@@ -1974,7 +2137,9 @@
                 return self.itemized.count;
             }else if (section == 3) {   // 审批附件数据源
                 return self.EnclosureData.count;
-            }else if (section == 4) {   // 审批流程UI数据源
+            }else if (section == 4) {   // 现场照片
+                return 1;
+            }else if (section == 5) {   // 审批流程UI数据源
                 return self.procedureData.count;
             }else {
                 return 0;
@@ -1989,7 +2154,7 @@
             }else if (section == 1) {
                 if ([_model.piType isEqualToString:@"XMFZR"]) {
                     return self.xmProject.count;
-                }else if ([_model.piType isEqualToString:@"CLCGFK"] || [_model.piType isEqualToString:@"CLCGYFK"] || [_model.piType isEqualToString:@"CGHT"] || [_model.piType isEqualToString:@"BCHT"]) {
+                }else if ([_model.piType isEqualToString:@"CLCGFK"] || [_model.piType isEqualToString:@"CLCGYFK"] || [_model.piType isEqualToString:@"CGHT"] || [_model.piType isEqualToString:@"BCHT"] || [_model.piType isEqualToString:@"KP"] || [_model.piType isEqualToString:@"SPGL"]) {
                     return 1;
                 }else if ([_model.piType isEqualToString:@"YBBX"] || [_model.piType isEqualToString:@"XMBX"] || [_model.piType isEqualToString:@"JKBX"] || [_model.piType isEqualToString:@"LWFK"] || [_model.piType isEqualToString:@"CLFK"] || [_model.piType isEqualToString:@"LKDJ"] || [_model.piType isEqualToString:@"BK"] || [_model.piType isEqualToString:@"IDZKSQ"]) {
                     return self.itemized.count;
@@ -2000,7 +2165,9 @@
                 }
             }else if (section == 2) {   // 审批附件数据源
                 return self.EnclosureData.count;
-            }else if (section == 3) {   // 审批流程UI数据源
+            }else if (section == 3) {   // 现场照片
+                return 1;
+            }else if (section == 4) {   // 审批流程UI数据源
                 return self.procedureData.count;
             }else {
                 return 0;
@@ -2015,7 +2182,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [self.activity stopAnimating];
-    
+
     if (indexPath.section == 0) {
         // 公文申请需要调用的方法
         if (self.isType) {
@@ -2469,7 +2636,7 @@
                 [cell creatYZWCApproveUIWithModel:self.data[indexPath.row]];
                 return cell;
              
-            } else if ([_model.piType isEqualToString:@"WDZB"] || [_model.piType isEqualToString:@"ZBSPL"]) { //周报
+            } else if ([_model.piType isEqualToString:@"ZBSPL"]) { //周报
                 ZBCell *cell = [[ZBCell alloc] init];
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.passHeightDelegate = self;
@@ -2561,6 +2728,42 @@
                 cell.selectionStyle = UITableViewCellSelectionStyleNone;
                 cell.passHeightDelegate = self;
                 [cell creatLWFBHTApproveUIWithModel:self.data[indexPath.row]];
+                return cell;
+            } else if ([_model.piType isEqualToString:@"LWHT"]) { //劳务合同
+                LWHTCell *cell = [[LWHTCell alloc] init];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.passHeightDelegate = self;
+                [cell creatLWHTApproveUIWithModel:self.data[indexPath.row]];
+                return cell;
+            } else if ([_model.piType isEqualToString:@"LWJDK"]) { //劳务进度款
+                LWJDKCell *cell = [[LWJDKCell alloc] init];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.passHeightDelegate = self;
+                [cell creatLWJDKApproveUIWithModel:self.data[indexPath.row]];
+                return cell;
+            } else if ([_model.piType isEqualToString:@"LWJSK"]) { //劳务结算款
+                LWJSKCell *cell = [[LWJSKCell alloc] init];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.passHeightDelegate = self;
+                [cell creatLWJSKApproveUIWithModel:self.data[indexPath.row]];
+                return cell;
+            } else if ([_model.piType isEqualToString:@"KP"]) { // 开票
+                KPCell *cell = [[KPCell alloc] init];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.passHeightDelegate = self;
+                [cell creatKPApproveUIWithModel:self.data[indexPath.row]];
+                return cell;
+            } else if ([_model.piType isEqualToString:@"SPGL"]) { // 收票
+                SPCell *cell = [[SPCell alloc] init];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.passHeightDelegate = self;
+                [cell creatSPApproveUIWithModel:self.data[indexPath.row]];
+                return cell;
+            } else if ([_model.piType isEqualToString:@"NKDJ"]) { //诺款登记
+                NKDJCell *cell = [[NKDJCell alloc] init];
+                cell.selectionStyle = UITableViewCellSelectionStyleNone;
+                cell.passHeightDelegate = self;
+                [cell creatNKDJApproveUIWithModel:self.data[indexPath.row]];
                 return cell;
             }
             
@@ -2706,6 +2909,18 @@
             }else {
                 return nil;
             }
+        }else if ([_model.piType isEqualToString:@"KP"]) {  // 开票
+            KPListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"kpListCell" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            self.ApproveTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+            [cell refreKPListUIWithData:self.xmProject];
+            return cell;
+        }else if ([_model.piType isEqualToString:@"SPGL"]) {  // 开票
+            SPListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"spListCell" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            self.ApproveTable.separatorStyle = UITableViewCellSeparatorStyleNone;
+            [cell refreSPListUIWithData:self.xmProject];
+            return cell;
         }
         
     }
@@ -2734,6 +2949,13 @@
                 return nil;
             }
         } else if (indexPath.section == 4) {
+            NowPhotosCell *cell = [tableView dequeueReusableCellWithIdentifier:@"nowPhotosCell" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            if (self.nowPhotos.count) {
+                [cell loadNowPhotosFromData:self.nowPhotos];
+            }
+            return cell;
+        } else if (indexPath.section == 5) {
             // 显示审批流程UI
             ApproveProcedureCell *cell = [[ApproveProcedureCell alloc] init];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -2760,6 +2982,13 @@
                 return nil;
             }
         } else if (indexPath.section == 3) {
+            NowPhotosCell *cell = [tableView dequeueReusableCellWithIdentifier:@"nowPhotosCell" forIndexPath:indexPath];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+            if (self.nowPhotos.count) {
+                [cell loadNowPhotosFromData:self.nowPhotos];
+            }
+            return cell;
+        }  else if (indexPath.section == 4) {
             // 显示审批流程UI
             ApproveProcedureCell *cell = [[ApproveProcedureCell alloc] init];
             cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -2784,6 +3013,36 @@
 }
 
 #pragma mark --传递UI高度--
+- (void)passHeightFromNKDJCell:(CGFloat)height
+{
+    _height = height;
+}
+
+- (void)passHeightFromLWHT:(CGFloat)height
+{
+    _height = height;
+}
+
+- (void)passHeightFromSPCell:(CGFloat)height
+{
+    _height = height;
+}
+
+- (void)passHeightFromKPCell:(CGFloat)height
+{
+    _height = height;
+}
+
+- (void)passHeightFromLWJSKCell:(CGFloat)height
+{
+    _height = height;
+}
+
+- (void)passHeightFromLWJDKCell:(CGFloat)height
+{
+    _height = height;
+}
+
 - (void)passHeightFromLWFBHT:(CGFloat)height
 {
     _height = height;
@@ -3186,7 +3445,7 @@
         // 报销内容
         if ([_model.piType isEqualToString:@"XMFZR"]) {
             return 110;
-        }else if ([_model.piType isEqualToString:@"CLCGFK"] || [_model.piType isEqualToString:@"CLCGYFK"] || [_model.piType isEqualToString:@"CGHT"]) {
+        }else if ([_model.piType isEqualToString:@"CLCGFK"] || [_model.piType isEqualToString:@"CLCGYFK"] || [_model.piType isEqualToString:@"CGHT"] || [_model.piType isEqualToString:@"KP"] || [_model.piType isEqualToString:@"SPGL"]) {
             return ((self.xmProject.count+1) * 25) + 20;
         }else if ([_model.piType isEqualToString:@"IDZKSQ"]) {
             return 125;
@@ -3206,22 +3465,28 @@
     if ([_model.piType isEqualToString:@"BK"]) {
         if (indexPath.section == 2) {
             return 160;
-        }else if (indexPath.section == 4) {
-            // 审批流UI高度
-            return _height;
         }else if (indexPath.section == 3) {
             // 审批附件UI高度
             return 100;
+        }else if (indexPath.section == 4) {
+            // 现场照片
+            return _shang*((kscreenWidth-40)/3) + (_shang * 10);
+        }else if (indexPath.section == 5) {
+            // 审批流UI高度
+            return _height;
         }else {
             return 0;
         }
     }else {
-        if (indexPath.section == 3) {
+        if (indexPath.section == 4) {
             // 审批流UI高度
             return _height;
         }else if (indexPath.section == 2) {
             // 审批附件UI高度
             return 100;
+        }else if (indexPath.section == 3) {
+            // 现场照片
+            return _shang*((kscreenWidth-40)/3) + (_shang * 10);
         }else {
             return 0;
         }

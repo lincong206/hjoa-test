@@ -76,7 +76,7 @@
     self.other = @[@"审批",@"我的申请",@"企业要闻",@"制度管理"];//,@"文档管理"];//,@"组织架构"];
     self.ybArr = @[@"请假",@"出差"];
     self.xmArr = @[@"一般报销",@"项目报销"];//,@"项目管控"];
-    self.xzrsArr = @[@"我的汇报",@"检查报告",@"质量检查"];//,@"移动考勤"];
+    self.xzrsArr = @[@"我的汇报",@"质量检查"];//,@"移动考勤"];
     
     self.nameArr = [NSArray arrayWithObjects:self.other,self.ybArr,self.xmArr,self.xzrsArr, nil];
     
@@ -282,16 +282,17 @@
             [self.navigationController pushViewController:weeklyVC animated:YES];
             
         }else if (indexPath.row == 1) {
-            // 检查报告
-            CheckReportViewController *crVC = [sb instantiateViewControllerWithIdentifier:@"checkReportVC"];
-            crVC.title = [self.officeData[indexPath.section] arr][indexPath.row];
-            [self.navigationController pushViewController:crVC animated:YES];
-
-        }else if (indexPath.row == 2) {
             //  质量检查
             QualityCheckViewController *qcVC = [sb instantiateViewControllerWithIdentifier:@"qcVC"];
             qcVC.title = [self.officeData[indexPath.section] arr][indexPath.row];
             [self.navigationController pushViewController:qcVC animated:YES];
+
+        }else if (indexPath.row == 2) {
+            // 检查报告     弃用
+            CheckReportViewController *crVC = [sb instantiateViewControllerWithIdentifier:@"checkReportVC"];
+            crVC.title = [self.officeData[indexPath.section] arr][indexPath.row];
+            [self.navigationController pushViewController:crVC animated:YES];
+            
         }else if (indexPath.row == 3) {
             //  新移动考勤 弃用
             NewRecordViewController *nrVC = [sb instantiateViewControllerWithIdentifier:@"nrVC"];

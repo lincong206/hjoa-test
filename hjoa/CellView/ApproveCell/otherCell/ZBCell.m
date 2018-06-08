@@ -103,6 +103,7 @@
             label.text = model.wkNeedcoordination;
             break;
         default:
+            label.text = @"--";
             break;
     }
     if (label.text == nil || [label.text isEqualToString:@"(null)"] || [label.text isEqual:[NSNull alloc]] || [label.text isEqualToString:@""] || [label.text isEqualToString:@" "]) {

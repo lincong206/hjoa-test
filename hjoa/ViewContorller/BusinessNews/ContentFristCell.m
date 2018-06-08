@@ -22,6 +22,7 @@
 
 - (void)refreContentFristCellDataWithModel:(BusinssNewsModel *)model
 {
+    
     self.title.text = model.naTitle;
     [self.image sd_setImageWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@/%@",intranetURL,model.naImg]] completed:^(UIImage * _Nullable image, NSError * _Nullable error, SDImageCacheType cacheType, NSURL * _Nullable imageURL) {
         if (error) {

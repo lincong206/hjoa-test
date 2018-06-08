@@ -20,6 +20,7 @@
 #import "PhotosCell.h"
 #import "QCStatusButCell.h"
 #import "QCRectifyCell.h"
+#import "NowPhotosCell.h"
 
 #import "QCNatureViewController.h"
 #import "QCNoticePersonViewController.h"
@@ -30,7 +31,7 @@
 #import "ApproveEnclosureModel.h"
 #import "LeaveForApproveCell.h"
 
-@interface AddQualityCheckViewController () <UITableViewDelegate, UITableViewDataSource, passProjectDataFromSpecialPJTVC, passQCAddNewsCellText, passQCResultStringCellText, passButStatus, UIImagePickerControllerDelegate, UINavigationControllerDelegate, passSelectPhotos, passNature, passApproveIdFromLeaveCell, passPickViewFormLeaveForApproveCell, passStepDataFormLeaveCell, passHeightFromLeaveCell, UITextFieldDelegate>
+@interface AddQualityCheckViewController () <UITableViewDelegate, UITableViewDataSource, passProjectDataFromSpecialPJTVC, passQCAddNewsCellText, passQCResultStringCellText, passButStatus, UIImagePickerControllerDelegate, UINavigationControllerDelegate, passSelectPhotos, passNature, passApproveIdFromLeaveCell, passPickViewFormLeaveForApproveCell, passStepDataFormLeaveCell, passHeightFromLeaveCell, passLeaveDaysCellText>
 {
     NSString *_nameString;
     NSArray *_name;
@@ -40,14 +41,15 @@
     NSString *_time;        // 时间参数
     NSString *_checkString; // 检查项
     NSString *_resultString;    // 检查结果
-    NSString *_theme;        // 报告主题
-    BOOL _isRectify;            // 是否显示整改按钮
+    NSString *_checkTheme;        // 报告主题
+    BOOL _isNow;
     NSString *_nature;          // 性质参数
     NSString *_natureName;          // 性质参数
     NSString *_resultState;     // 结果状态
     NSMutableArray *_step;      // 审批数据
     CGFloat _approveCellHeight; // 审批显示高度
     NSString *_apId;            // 审批id
+    NSInteger _shang;
 }
 @property (strong, nonatomic) UITableView *addQCTable;
 
@@ -58,10 +60,21 @@
 @property (strong, nonatomic) UIImagePickerController *imagePick;
 @property (strong, nonatomic) NSMutableArray *photosArr;
 @property (strong, nonatomic) NSMutableArray *upPhotos;     // 上传附件
+@property (strong, nonatomic) NSMutableArray *upNowPhotos;     // 上传附件
 @property (strong, nonatomic) NSString *pcId;
+@property (strong, nonatomic) AFHTTPSessionManager *manager;
+
 @end
 
 @implementation AddQualityCheckViewController
+
+- (AFHTTPSessionManager *)manager
+{
+    if (!_manager) {
+        _manager = [AFHTTPSessionManager manager];
+    }
+    return _manager;
+}
 
 - (UIImagePickerController *)imagePick
 {
@@ -87,6 +100,14 @@
         _photosArr = [NSMutableArray array];
     }
     return _photosArr;
+}
+
+- (NSMutableArray *)upNowPhotos
+{
+    if (!_upNowPhotos) {
+        _upNowPhotos = [NSMutableArray array];
+    }
+    return _upNowPhotos;
 }
 
 - (UIView *)pickBackView
@@ -115,6 +136,9 @@
         _addQCTable = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, kscreenWidth, kscreenHeight - 50) style:UITableViewStylePlain];
         _addQCTable.delegate = self;
         _addQCTable.dataSource = self;
+        _addQCTable.estimatedRowHeight = 0;
+        _addQCTable.estimatedSectionHeaderHeight = 0;
+        _addQCTable.estimatedSectionFooterHeight = 0;
         _addQCTable.tableFooterView = [[UIView alloc] initWithFrame:CGRectNull];
     }
     return _addQCTable;
@@ -139,8 +163,8 @@
 // 创建，上传参数
 - (void)doneButtonOnClicked:(UIButton *)but
 {
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    
+    [self.manager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     //  参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     [params setObject:@"0" forKey:@"birRectification"];
@@ -150,8 +174,8 @@
     }else {
         [params setObject:@"" forKey:@"birTime"];
     }
-    if (_theme) {
-        [params setObject:_theme forKey:@"birTheme"];
+    if (_checkTheme) {
+        [params setObject:_checkTheme forKey:@"birTheme"];
     }else {
         [params setObject:@"" forKey:@"birTheme"];
     }
@@ -228,6 +252,7 @@
     //  files 第三个参数 上传图片
     NSMutableDictionary *dic2 = [NSMutableDictionary dictionary];
     NSString *fileString = @"";
+    NSString *nowString = @"";  // 现场图片
     // 有数据
     if (self.upPhotos.count == 0) {
         
@@ -250,7 +275,31 @@
             fileString = [NSString stringWithFormat:@"%@}!",lastString];
         }
     }
-    [dic2 setObject:fileString forKey:@"file"];
+    // 现场照片有数据
+    if (self.upNowPhotos.count == 0) {
+        
+    }else {
+        for (ApproveEnclosureModel *model in self.upNowPhotos) {
+            NSMutableDictionary *photos = [NSMutableDictionary dictionary];
+            [photos setObject:model.baiName forKey:@"baiName"];
+            [photos setObject:@"" forKey:@"baiState"];
+            [photos setObject:model.baiSize forKey:@"baiSize"];
+            // 上传成功时，返回的id
+            [photos setObject:[NSString stringWithFormat:@"empty"] forKey:@"piId"];
+            [photos setObject:@"JCBGT" forKey:@"piType"];
+            [photos setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"uiId"] forKey:@"uiId"];
+            [photos setObject:model.baiSubsequent forKey:@"baiSubsequent"];
+            [photos setObject:model.baiUrl forKey:@"baiUrl"];
+            nowString = [NSString stringWithFormat:@"%@%@!",nowString,photos];
+            
+            nowString = [nowString stringByReplacingOccurrencesOfString:@"=" withString:@":"];
+            nowString = [nowString stringByReplacingOccurrencesOfString:@";" withString:@","];
+            NSString *lastString = [nowString substringToIndex:nowString.length-4];
+            nowString = [NSString stringWithFormat:@"%@}!",lastString];
+        }
+    }
+    NSString *file = [NSString stringWithFormat:@"%@%@",fileString,nowString];
+    [dic2 setObject:file forKey:@"file"];
     [dic setObject:dic2 forKey:@"files"];
     
     // curr 第四个参数
@@ -268,7 +317,7 @@
     }else if (_typeName == nil || [_typeName isEqualToString:@""]) {
         [self showAlertControllerMessage:@"请选择项目" andTitle:@"提示" andIsReturn:NO];
     }else {
-        [manager POST:qcCreatUrl parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self.manager POST:qcCreatUrl parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             
             if ([responseObject[@"status"] isEqualToString:@"success"]) {
                 //  成功上传
@@ -287,18 +336,18 @@
     
     _nameString = [[NSUserDefaults standardUserDefaults] objectForKey:@"uiName"];
 
+    _shang = 0;
+    
     self.imagePick.delegate = self;
-    
     [self.view addSubview:self.addQCTable];
-    
     [self registerCell];
-    
     [self addPickView];
     
     //监听键盘出现和消失
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
+
 #pragma mark 键盘出现
 -(void)keyboardWillShow:(NSNotification *)note
 {
@@ -320,8 +369,8 @@
     [self.addQCTable registerNib:[UINib nibWithNibName:@"LeavePhotoCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"lphotoCell"];
     [self.addQCTable registerNib:[UINib nibWithNibName:@"PhotosCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"photosCell"];
     [self.addQCTable registerNib:[UINib nibWithNibName:@"QCStatusButCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"qcStatusButCell"];
-    [self.addQCTable registerNib:[UINib nibWithNibName:@"QCRectifyCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"qcRectifyCell"];
     [self.addQCTable registerNib:[UINib nibWithNibName:@"LeaveForApproveCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"lfaCell"];
+    [self.addQCTable registerNib:[UINib nibWithNibName:@"NowPhotosCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"nowPhotosCell"];
 }
 
 - (void)addPickView
@@ -344,7 +393,7 @@
 #pragma mark --TableViewDelegate--
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 7;
+    return 9;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -358,7 +407,9 @@
         }else {
             return 10;
         }
-    }else if (section == 6) {
+    }else if (section == 5) {
+        return 5;
+    }else if (section == 8) {
         return 10;
     }else {
         return 0;
@@ -378,11 +429,7 @@
         return 5;
     }else if (section == 2) {
         return 2;
-    }else if (section == 3 || section == 4 || section == 6) {
-        return 1;
-    }else if (section == 5) {
-        return 1;
-    }else if (section == 0) {
+    }else if (section == 0 || section == 3 || section == 4 || section == 5 || section == 6 || section == 7 || section == 8) {
         return 1;
     }else {
         return 0;
@@ -397,8 +444,12 @@
         LeaveDaysCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ldaysCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.titleName.text = @"检查主题";
-        cell.days.placeholder = @"请输入检查主题";
-        cell.days.delegate = self;
+        cell.passTextDelegate = self;
+        if (_checkTheme) {
+            cell.days.text = _checkTheme;
+        }else {
+            cell.days.placeholder = @"请输入检查主题";
+        }
         return cell;
     } else if (indexPath.section == 1) {       // 基本资料
         _name = @[@"项目:",@"性质:",@"日期:",@"检查人:",@"检查项:"];
@@ -465,33 +516,35 @@
             cell.hidden = YES;
             return cell;
         }
-    }else if (indexPath.section == 4) {         // 按键
+    }else if (indexPath.section == 4) {  // 现场照片
+        LeavePhotoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"lphotoCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.title.text = @"现场照片";
+        cell.image.image = [UIImage imageNamed:@"adjunct_icon"];
+        return cell;
+    }else if (indexPath.section == 5) {     // 图片显示
+        NowPhotosCell *cell = [tableView dequeueReusableCellWithIdentifier:@"nowPhotosCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (self.upNowPhotos.count) {
+            [cell loadNowPhotosFromData:self.upNowPhotos];
+        }
+        return cell;
+    }
+    else if (indexPath.section == 6) {         // 按键
         QCStatusButCell *cell = [tableView dequeueReusableCellWithIdentifier:@"qcStatusButCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.butName = @[@"通过",@"口头警告",@"书面整改"];
         cell.passStatusDelegate = self;
-        [cell loadQCStatusFromState:nil andUserEnabled:YES];
+        [cell loadQCStatusFromState:_resultState andUserEnabled:YES];
         return cell;
-    }else if (indexPath.section == 5) {         // 人物和生成整改单
-        if (indexPath.row == 0) {
-            QCDetailsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"qcDetailsCell" forIndexPath:indexPath];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.title.text = @"纪录人";
-            cell.icon.image = [UIImage imageNamed:@"qc_person"];
-            cell.content.text = _nameString;
-            return cell;
-        }else {             // 整改按钮
-            QCRectifyCell *cell = [tableView dequeueReusableCellWithIdentifier:@"qcRectifyCell" forIndexPath:indexPath];
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            if (_isRectify) {
-                cell.hidden = NO;
-                return cell;
-            }else {
-                cell.hidden = YES;
-                return cell;
-            }
-        }
-    }else if (indexPath.section == 6) {
+    }else if (indexPath.section == 7) {         // 人物
+        QCDetailsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"qcDetailsCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.title.text = @"纪录人";
+        cell.icon.image = [UIImage imageNamed:@"qc_person"];
+        cell.content.text = _nameString;
+        return cell;
+    }else if (indexPath.section == 8) {
         LeaveForApproveCell *cell = [tableView dequeueReusableCellWithIdentifier:@"lfaCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.type = @"JCBG";
@@ -507,7 +560,7 @@
 - (void)passHeightFromLeaveCell:(CGFloat)height
 {
     _approveCellHeight = height;
-    [self.addQCTable reloadSections:[NSIndexSet indexSetWithIndex:6] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.addQCTable reloadSections:[NSIndexSet indexSetWithIndex:7] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -531,17 +584,14 @@
             return 0;
         }
     }else if (indexPath.section == 4) {
-        return 44;
+        return 50;
     }else if (indexPath.section == 5) {
-        if (indexPath.row == 1) {
-            if (_isRectify) {
-                return 44;
-            }else {
-                return 0;
-            }
-        }
-        return 44;
+        return _shang*((kscreenWidth-40)/3) + (_shang * 10);
     }else if (indexPath.section == 6) {
+        return 44;
+    }else if (indexPath.section == 7) {
+        return 44;
+    }else if (indexPath.section == 8) {
         return _approveCellHeight + 80;
     }else if (indexPath.section == 0) {
         return 50;
@@ -567,15 +617,19 @@
         }
     }else if (indexPath.section == 2) {
         if (indexPath.row == 1) {           // 附件
+            _isNow = false;
             [self creatAlertController];
         }
+    }else if (indexPath.section == 4) {
+        _isNow = true;
+        [self creatAlertController];
     }
 }
 
-// 报告主题
-- (void)textFieldDidEndEditing:(UITextField *)textField
+#pragma mark --检查主题--
+- (void)passLeaveDaysCellWithText:(NSString *)text
 {
-    _theme = textField.text;
+    _checkTheme = text;
 }
 #pragma mark --性质选择--
 - (void)passNatureFromVC:(NSString *)nature andCount:(NSString *)count
@@ -620,13 +674,7 @@
 #pragma mark --passButStatus--
 - (void)passButStatus:(NSString *)status andButTag:(NSInteger)tag
 {
-    if ([status isEqualToString:@"书面整改"]) {
-        _isRectify = true;
-    }else {
-        _isRectify = false;
-    }
-    _resultState = [NSString stringWithFormat:@"%ld",tag-100];
-    [self.addQCTable reloadSections:[NSIndexSet indexSetWithIndex:5] withRowAnimation:UITableViewRowAnimationAutomatic];
+    _resultState = [NSString stringWithFormat:@"%ld",(long)tag-100];
 }
 #pragma mark --passPickViewFormLeaveForApproveCell--
 - (void)passPickViewFormLeaveForApproveCell:(UIView *)view
@@ -647,15 +695,26 @@
 {
     // 创建一个警告控制器
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"选取图片" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    // 设置拍照警告响应事件
-    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        // 设置照片来源为相机
-        self.imagePick.sourceType = UIImagePickerControllerSourceTypeCamera;
-        // 设置进入相机时使用前置或后置摄像头
-        self.imagePick.cameraDevice = UIImagePickerControllerCameraDeviceRear;
-        // 展示选取照片控制器
-        [self presentViewController:self.imagePick animated:YES completion:^{}];
-    }];
+    if (_isNow) {
+        
+    }else {
+        // 设置拍照警告响应事件
+        UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            // 设置照片来源为相机
+            self.imagePick.sourceType = UIImagePickerControllerSourceTypeCamera;
+            // 设置进入相机时使用前置或后置摄像头
+            self.imagePick.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+            // 展示选取照片控制器
+            [self presentViewController:self.imagePick animated:YES completion:^{}];
+        }];
+        
+        // 判断是否支持相机
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+        {
+            // 添加警告按钮
+            [alert addAction:cameraAction];
+        }
+    }
     // 设置相册警告响应事件
     UIAlertAction *photosAction = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self getOriginalImages];
@@ -663,12 +722,7 @@
     
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
-    // 判断是否支持相机
-    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-    {
-        // 添加警告按钮
-        [alert addAction:cameraAction];
-    }
+    
     [alert addAction:photosAction];
     [alert addAction:cancelAction];
     // 展示警告控制器
@@ -717,11 +771,22 @@
 #pragma mark --选择图片passDelegate--
 - (void)passSelectPhotosFromPhotosVC:(NSMutableArray *)selectArr
 {
-    self.photosArr = selectArr;
-    for (UIImage *image in selectArr) {
-        [self upLoadImageWith:image];
+    if (_isNow) {   // 现场照片
+        if (selectArr.count%3 == 0) {
+            _shang = selectArr.count/3;
+        }else {
+            _shang = (NSInteger)(selectArr.count/3) + 1;
+        }
+        for (UIImage *image in selectArr) {
+            [self upLoadImageWith:[self scaleImage:image ToWidth:1200] isNow:YES];
+        }
+        
+    }else {         // 附件
+        self.photosArr = selectArr;
+        for (UIImage *image in selectArr) {
+            [self upLoadImageWith:[self scaleImage:image ToWidth:0] isNow:NO];
+        }
     }
-    [self.addQCTable reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 #pragma mark UIImagePickerControllerDelegate
 //该代理方法仅适用于只选取图片时
@@ -730,43 +795,86 @@
     UIImage *img = editingInfo[UIImagePickerControllerOriginalImage];
     [self.photosArr addObject:img];
     // 上传图片
-    [self upLoadImageWith:img];
-    [self.addQCTable reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self upLoadImageWith:[self scaleImage:image ToWidth:0] isNow:NO];
+
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-// 上传图片
-- (void)upLoadImageWith:(UIImage *)image
+
+// 设置上传图片尺寸大小 最大边长
+- (UIImage *)scaleImage:(UIImage *)sourceImage ToWidth:(CGFloat)width
 {
+    // 如果传入的宽度比当前宽度还要大,就直接返回
+    if (width == 0) {
+        return sourceImage;
+    }else if (width > sourceImage.size.width) {
+        return  sourceImage;
+    }
+    CGFloat widthFactor = width / sourceImage.size.width;
+    CGFloat heightFactor = width / sourceImage.size.height;
+    CGFloat scaleFactor = 0.0;  // 比例
+    if (widthFactor >= heightFactor) {
+        scaleFactor = heightFactor;
+    }else {
+        scaleFactor = widthFactor;
+    }
+    // 初始化要画的大小
+    CGRect  rect = CGRectMake(0, 0, scaleFactor*sourceImage.size.width, scaleFactor*sourceImage.size.height);
+    // 1. 开启图形上下文
+    UIGraphicsBeginImageContext(rect.size);
+    // 2. 画到上下文中 (会把当前image里面的所有内容都画到上下文)
+    [sourceImage drawInRect:rect];
+    // 3. 取到图片
+    UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
+    // 4. 关闭上下文
+    UIGraphicsEndImageContext();
+    // 5. 返回
+    return image;
+}
+
+// 上传图片 分为现场照片和附件       true -> 现场照片
+- (void)upLoadImageWith:(UIImage *)image isNow:(BOOL)isNow
+{
+    NSString *url = @"";
     NSData *data = UIImageJPEGRepresentation(image, 0.5);
-    if (data) {
-        NSString *url = [NSString stringWithFormat:@"%@/uploadFile/saveFile?num=1",intranetURL];
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"yyyyMMddHHmmss"];
-        NSString *imageDate = [formatter stringFromDate:[NSDate date]];
+    if (isNow) {
+        url = [NSString stringWithFormat:@"%@/uploadFile/saveFiles?num=1",intranetURL];
+    }else {
+        url = [NSString stringWithFormat:@"%@/uploadFile/saveFile?num=1",intranetURL];
+    }
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyyMMddHHmmss"];
+    NSString *imageDate = [formatter stringFromDate:[NSDate date]];
+    
+    self.manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    [self.manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:data name:isNow ? @"fileList":@"files" fileName:[NSString stringWithFormat:@"%@.jpg",imageDate] mimeType:@"image/jpg"];
+    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
         
-        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-        manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-        
-        [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-            [formData appendPartWithFileData:data name:@"files" fileName:[NSString stringWithFormat:@"%@.jpg",imageDate] mimeType:@"image/jpg"];
-        } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            
-            for (NSDictionary *dic in responseObject[@"rows"]) {
-                ApproveEnclosureModel *model = [[ApproveEnclosureModel alloc] init];
-                [model setValuesForKeysWithDictionary:dic];
+        for (NSDictionary *dic in responseObject[@"rows"]) {
+            ApproveEnclosureModel *model = [[ApproveEnclosureModel alloc] init];
+            [model setValuesForKeysWithDictionary:dic];
+            if (isNow) {
+                // 现场图片
+                [self.upNowPhotos addObject:model];
+            }else { // 附件图片
                 [self.upPhotos addObject:model];
             }
-            if ([responseObject[@"status"] isEqualToString:@"yes"]) {
-                [self showAlertControllerMessage:@"上传成功" andTitle:@"提示" andIsReturn:NO];
+        }
+        if ([responseObject[@"status"] isEqualToString:@"yes"]) {
+            [self showAlertControllerMessage:@"上传成功" andTitle:@"提示" andIsReturn:NO];
+            if (isNow) {
+                [self.addQCTable reloadSections:[NSIndexSet indexSetWithIndex:5] withRowAnimation:UITableViewRowAnimationAutomatic];
             }else {
-                [self showAlertControllerMessage:@"上传失败,网络错误" andTitle:@"提示" andIsReturn:NO];
+                [self.addQCTable reloadSections:[NSIndexSet indexSetWithIndex:3] withRowAnimation:UITableViewRowAnimationAutomatic];
             }
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [self showAlertControllerMessage:@"上传失败" andTitle:@"提示" andIsReturn:NO];
-        }];
-    }else {
+        }else {
+            [self showAlertControllerMessage:@"上传失败,网络错误" andTitle:@"提示" andIsReturn:NO];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
         [self showAlertControllerMessage:@"上传失败" andTitle:@"提示" andIsReturn:NO];
-    }
+    }];
 }
 //进入拍摄页面点击取消按钮
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker

@@ -21,5 +21,8 @@
 @property (strong, nonatomic) NSString *bpcStartdate;
 @property (strong, nonatomic) NSString *bpcWorkeddate;
 @property (strong, nonatomic) NSString *birContent;
+@property (strong, nonatomic) NSString *birExamined;
+@property (strong, nonatomic) NSString *birInspectionresult;
+@property (strong, nonatomic) NSString *birResultstate;
 
 @end

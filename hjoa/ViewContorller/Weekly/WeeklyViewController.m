@@ -27,16 +27,21 @@
 #import "PhotosViewController.h"    // 多附件上传页面
 #import "PhotosModel.h"
 
-@interface WeeklyViewController () <UITableViewDelegate, UITableViewDataSource, passPickViewFromTypeCell, passTypeLabelFromTypeCell, passProjectDataFromSpecialPJTVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, passPickViewFormLeaveForApproveCell, passApproveIdFromLeaveCell, passHeightFromLeaveCell, passStepDataFormLeaveCell, passSelectPhotos, passReasonWithTag>
+#import "NowPhotosCell.h"
+
+
+@interface WeeklyViewController () <UITableViewDelegate, UITableViewDataSource, passPickViewFromTypeCell, passTypeLabelFromTypeCell, passProjectDataFromSpecialPJTVC, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, passPickViewFormLeaveForApproveCell, passApproveIdFromLeaveCell, passHeightFromLeaveCell, passStepDataFormLeaveCell, passSelectPhotos, passReasonWithTag, passLeaveDaysCellText>
 {
     NSArray *_companyArr;
     NSString *_company;
     NSString *_zbType;      // 周报类型
+    NSInteger _shang;
+    BOOL _isNow;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *weeklyTable;
 
-@property (assign, nonatomic) NSInteger isPJT;   // 是否为项目部的周报
+@property (assign, nonatomic) NSInteger isPJT;   // 是否为项目部的周报  -> 1 项目部
 @property (strong, nonatomic) NSString *projectName;
 
 @property (strong, nonatomic) NSMutableArray *photoArr;
@@ -57,13 +62,23 @@
 
 @property (strong, nonatomic) NSMutableArray *step;
 
-@property (strong, nonatomic) NSMutableArray *stepPhotoArr;
-
+@property (strong, nonatomic) NSMutableArray *stepPhotoArr; // 附件
+@property (strong, nonatomic) NSMutableArray *upNowPhotos;  // 现场照片
 @property (strong, nonatomic) NSUserDefaults *user;
+
+@property (strong, nonatomic) AFHTTPSessionManager *manager;
 
 @end
 
 @implementation WeeklyViewController
+
+- (AFHTTPSessionManager *)manager
+{
+    if (!_manager) {
+        _manager = [AFHTTPSessionManager manager];
+    }
+    return _manager;
+}
 
 - (UIImagePickerController *)imagePick
 {
@@ -82,7 +97,13 @@
     }
     return _photoArr;
 }
-
+- (NSMutableArray *)upNowPhotos
+{
+    if (!_upNowPhotos) {
+        _upNowPhotos = [NSMutableArray array];
+    }
+    return _upNowPhotos;
+}
 - (NSMutableArray *)stepPhotoArr
 {
     if (!_stepPhotoArr) {
@@ -120,8 +141,8 @@
 {
     self.approveType = @"ZBSPL";
     //  上传周报数据
-    AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
+    
+    [self.manager.requestSerializer setValue:@"application/x-www-form-urlencoded; charset=utf-8" forHTTPHeaderField:@"Content-Type"];
     //  参数
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
 
@@ -174,15 +195,25 @@
         [params setObject:@"" forKey:@"wkCompant"];
     }
     // 周报标题
-    [params setObject:self.wkTitle forKey:@"wkTitle"];
+    if (self.wkTitle) {
+        [params setObject:self.wkTitle forKey:@"wkTitle"];
+    }
     // 本周完成工作
-    [params setObject:self.wkFinishwork forKey:@"wkFinishworkweek"];
+    if (self.wkFinishwork) {
+        [params setObject:self.wkFinishwork forKey:@"wkFinishworkweek"];
+    }
     // 本周总结
-    [params setObject:self.wkSummarywork forKey:@"wkSummaryworkweek"];
+    if (self.wkSummarywork) {
+        [params setObject:self.wkSummarywork forKey:@"wkSummaryworkweek"];
+    }
     // 下周计划
-    [params setObject:self.wkWorkplan forKey:@"wkWorkplannext"];
+    if (self.wkWorkplan) {
+        [params setObject:self.wkWorkplan forKey:@"wkWorkplannext"];
+    }
     // 协调帮忙
-    [params setObject:self.wkNeedcoor forKey:@"wkNeedcoordination"];
+    if (self.wkNeedcoor) {
+        [params setObject:self.wkNeedcoor forKey:@"wkNeedcoordination"];
+    }
     
     //  params 参数
     NSMutableDictionary *dic = [NSMutableDictionary dictionary];
@@ -208,6 +239,7 @@
     //  files 第三个参数 上传图片
     NSMutableDictionary *dic2 = [NSMutableDictionary dictionary];
     NSString *fileString = @"";
+    NSString *nowString = @"";
     // 有数据
     if (self.stepPhotoArr.count == 0) {
         
@@ -231,8 +263,31 @@
             fileString = [NSString stringWithFormat:@"%@}!",lastString];
         }
     }
-    
-    [dic2 setObject:fileString forKey:@"file"];
+    // 现场照片有数据
+    if (self.upNowPhotos.count == 0) {
+        
+    }else {
+        for (ApproveEnclosureModel *model in self.upNowPhotos) {
+            NSMutableDictionary *photos = [NSMutableDictionary dictionary];
+            [photos setObject:model.baiName forKey:@"baiName"];
+            [photos setObject:@"" forKey:@"baiState"];
+            [photos setObject:model.baiSize forKey:@"baiSize"];
+            // 上传成功时，返回的id
+            [photos setObject:[NSString stringWithFormat:@"empty"] forKey:@"piId"];
+            [photos setObject:@"ZBSG" forKey:@"piType"];
+            [photos setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"uiId"] forKey:@"uiId"];
+            [photos setObject:model.baiSubsequent forKey:@"baiSubsequent"];
+            [photos setObject:model.baiUrl forKey:@"baiUrl"];
+            nowString = [NSString stringWithFormat:@"%@%@!",nowString,photos];
+            
+            nowString = [nowString stringByReplacingOccurrencesOfString:@"=" withString:@":"];
+            nowString = [nowString stringByReplacingOccurrencesOfString:@";" withString:@","];
+            NSString *lastString = [nowString substringToIndex:nowString.length-4];
+            nowString = [NSString stringWithFormat:@"%@}!",lastString];
+        }
+    }
+    NSString *file = [NSString stringWithFormat:@"%@%@",fileString,nowString];
+    [dic2 setObject:file forKey:@"file"];
     [dic setObject:dic2 forKey:@"files"];
     
     // 必填字段
@@ -259,7 +314,7 @@
         NSString *paramsStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
         [params setObject:paramsStr forKey:@"params"];
 
-        [manager POST:weeklyUrl parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        [self.manager POST:weeklyUrl parameters:params progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
             if ([responseObject[@"status"] isEqualToString:@"success"]) {
                 // 删除零时数据
                 [self.user removeObjectForKey:@"wkTitle"];
@@ -279,7 +334,7 @@
 
 - (void)passStepDataFormLeaveCellWithStepData:(NSMutableArray *)step
 {
-    self.step = step;
+    self. step = step;
 }
 
 
@@ -333,11 +388,12 @@
     [self.weeklyTable registerNib:[UINib nibWithNibName:@"LeavePhotoCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"lphotoCell"];
     [self.weeklyTable registerNib:[UINib nibWithNibName:@"PhotosCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"photosCell"];
     [self.weeklyTable registerNib:[UINib nibWithNibName:@"LeaveForApproveCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"lfaCell"];
+    [self.weeklyTable registerNib:[UINib nibWithNibName:@"NowPhotosCell" bundle:[NSBundle mainBundle]] forCellReuseIdentifier:@"nowPhotosCell"];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 11;
+    return 13;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -361,7 +417,7 @@
 - (void)passHeightFromLeaveCell:(CGFloat)height
 {
     _approveCellHeight = height;
-    [self.weeklyTable reloadSections:[NSIndexSet indexSetWithIndex:8] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.weeklyTable reloadSections:[NSIndexSet indexSetWithIndex:11] withRowAnimation:UITableViewRowAnimationBottom];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -378,7 +434,9 @@
         }else {
             return 0;
         }
-    }else if (indexPath.section == 10) {
+    }else if (indexPath.section == 11) {
+        return _shang*((kscreenWidth-40)/3) + (_shang * 10);
+    }else if (indexPath.section == 12) {
         return _approveCellHeight + 80;
     }else if (indexPath.section > 3 && indexPath.section < 8) {
         return 100;
@@ -443,9 +501,11 @@
         LeaveDaysCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ldaysCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.titleName.text = @"标题";
-        cell.days.placeholder = @"请输入文字";
-        if (self.wkTitle && cell.days.tag == 203) {
+        cell.passTextDelegate = self;
+        if (self.wkTitle) {
             cell.days.text = self.wkTitle;
+        }else {
+            cell.days.placeholder = @"请输入文字";
         }
         return cell;
         
@@ -489,7 +549,20 @@
             cell.hidden = YES;
             return cell;
         }
-    }else if (indexPath.section == 10) {
+    }else if (indexPath.section == 10) {  // 现场照片
+        LeavePhotoCell *cell = [tableView dequeueReusableCellWithIdentifier:@"lphotoCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.title.text = @"现场照片";
+        cell.image.image = [UIImage imageNamed:@"adjunct_icon"];
+        return cell;
+    }else if (indexPath.section == 11) {     // 图片显示
+        NowPhotosCell *cell = [tableView dequeueReusableCellWithIdentifier:@"nowPhotosCell" forIndexPath:indexPath];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        if (self.upNowPhotos.count) {
+            [cell loadNowPhotosFromData:self.upNowPhotos];
+        }
+        return cell;
+    }else if (indexPath.section == 12) {
         LeaveForApproveCell *cell = [tableView dequeueReusableCellWithIdentifier:@"lfaCell" forIndexPath:indexPath];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         cell.type = @"ZBSPL";
@@ -505,6 +578,10 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 8) {
+        _isNow = false;
+        [self creatAlertController];
+    }else if (indexPath.section == 10) {
+        _isNow = true;
         [self creatAlertController];
     }
 }
@@ -515,16 +592,26 @@
 {
     // 创建一个警告控制器
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"选取图片" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    // 设置拍照警告响应事件
-    UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        // 设置照片来源为相机
-        self.imagePick.sourceType = UIImagePickerControllerSourceTypeCamera;
-        // 设置进入相机时使用前置或后置摄像头
-        self.imagePick.cameraDevice = UIImagePickerControllerCameraDeviceRear;
-        // 展示选取照片控制器
-        [self presentViewController:self.imagePick animated:YES completion:^{}];
-    }];
-    
+    if (_isNow) {
+        
+    }else {
+        // 设置拍照警告响应事件
+        UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"拍照" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+            // 设置照片来源为相机
+            self.imagePick.sourceType = UIImagePickerControllerSourceTypeCamera;
+            // 设置进入相机时使用前置或后置摄像头
+            self.imagePick.cameraDevice = UIImagePickerControllerCameraDeviceRear;
+            // 展示选取照片控制器
+            [self presentViewController:self.imagePick animated:YES completion:^{}];
+        }];
+        
+        // 判断是否支持相机
+        if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
+        {
+            // 添加警告按钮
+            [alert addAction:cameraAction];
+        }
+    }
     // 设置相册警告响应事件
     UIAlertAction *photosAction = [UIAlertAction actionWithTitle:@"从相册选择" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self getOriginalImages];
@@ -533,28 +620,10 @@
     UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"取消" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
     }];
     
-    // 判断是否支持相机
-    if([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera])
-    {
-        // 添加警告按钮
-        [alert addAction:cameraAction];
-    }
     [alert addAction:photosAction];
     [alert addAction:cancelAction];
     // 展示警告控制器
     [self presentViewController:alert animated:YES completion:nil];
-}
-
-#pragma mark UIImagePickerControllerDelegate
-//该代理方法仅适用于只选取图片时
-- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo
-{
-    UIImage *img = editingInfo[UIImagePickerControllerOriginalImage];
-    // 上传图片
-    [self upLoadImageWith:img];
-    [self.photoArr addObject:img];
-    [self.weeklyTable reloadSections:[NSIndexSet indexSetWithIndex:9] withRowAnimation:UITableViewRowAnimationAutomatic];
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /**
@@ -581,7 +650,11 @@
     PhotosViewController *photosVC = [[UIStoryboard storyboardWithName:@"Main" bundle:[NSBundle mainBundle]] instantiateViewControllerWithIdentifier:@"attachmentsVC"];
     photosVC.title = assetCollection.localizedTitle;
     photosVC.passDelegate = self;
-    
+    if (self.isPJT == 1) {
+        photosVC.isMSelect = true;
+    }else {
+        photosVC.isMSelect = false;
+    }
     for (PHAsset *asset in assets) {
         @autoreleasepool {
             // 从asset中获得图片
@@ -597,59 +670,130 @@
     }
     [self.navigationController pushViewController:photosVC animated:YES];
 }
+
 #pragma mark --选择图片passDelegate--
 - (void)passSelectPhotosFromPhotosVC:(NSMutableArray *)selectArr
 {
-    self.photoArr = selectArr;
-    [self.weeklyTable reloadSections:[NSIndexSet indexSetWithIndex:9] withRowAnimation:UITableViewRowAnimationAutomatic];
-    for (UIImage *image in selectArr) {
-        [self upLoadImageWith:image];
-    }
-}
-// 上传图片
-- (void)upLoadImageWith:(UIImage *)image
-{
-    NSData *data = UIImageJPEGRepresentation(image, 0.5);
-    if (data) {
-        NSString *url = [NSString stringWithFormat:@"%@/uploadFile/saveFile?num=1",intranetURL];
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"yyyyMMddHHmmss"];
-        NSString *imageDate = [formatter stringFromDate:[NSDate date]];
-        
-        AFHTTPSessionManager *manager = [AFHTTPSessionManager manager];
-        manager.requestSerializer = [AFHTTPRequestSerializer serializer];
-        
-        [manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
-            [formData appendPartWithFileData:data name:@"files" fileName:[NSString stringWithFormat:@"%@.jpg",imageDate] mimeType:@"image/jpg"];
-        } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
-            
-            for (NSDictionary *dic in responseObject[@"rows"]) {
-                ApproveEnclosureModel *model = [[ApproveEnclosureModel alloc] init];
-                [model setValuesForKeysWithDictionary:dic];
-                [self.stepPhotoArr addObject:model];
-            }
-            if ([responseObject[@"status"] isEqualToString:@"yes"]) {
-                [self showAlertControllerMessage:@"上传成功" andTitle:@"提示" andIsReturn:NO];
+    if (_isNow) {   // 现场照片
+        if (selectArr.count%3 == 0) {
+            _shang = selectArr.count/3;
+        }else {
+            _shang = (NSInteger)(selectArr.count/3) + 1;
+        }
+        if (self.isPJT == 1) {      // 判断是否为项目部
+            if (selectArr.count > 8) {      // 项目部上传图片最少8张
+                for (UIImage *image in selectArr) {
+                    [self upLoadImageWith:[self scaleImage:image ToWidth:1200] isNow:YES];
+                }
             }else {
-                [self showAlertControllerMessage:@"上传失败,网络错误" andTitle:@"提示" andIsReturn:NO];
+                [self showAlertControllerMessage:@"根据集团要求:项目部周报必须上传”安全文明图片4张“,”项目部图片4张" andTitle:@"提示" andIsReturn:NO];
             }
-        } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
-            [self showAlertControllerMessage:@"上传失败" andTitle:@"提示" andIsReturn:NO];
-        }];
-    }else {
-        [self showAlertControllerMessage:@"上传失败" andTitle:@"提示" andIsReturn:NO];
+        }else {
+            for (UIImage *image in selectArr) {
+                [self upLoadImageWith:[self scaleImage:image ToWidth:1200] isNow:YES];
+            }
+        }
+    }else {         // 附件
+        self.photoArr = selectArr;
+        for (UIImage *image in selectArr) {
+            [self upLoadImageWith:[self scaleImage:image ToWidth:0] isNow:NO];
+        }
     }
 }
 
-#pragma mark --UITextFieldDelegate--
-- (BOOL)textFieldShouldEndEditing:(UITextField *)textField
+#pragma mark UIImagePickerControllerDelegate
+//该代理方法仅适用于只选取图片时
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(nullable NSDictionary<NSString *,id> *)editingInfo
 {
-    [textField endEditing:YES];
-    return YES;
+    UIImage *img = editingInfo[UIImagePickerControllerOriginalImage];
+    [self.photoArr addObject:img];
+    // 上传图片
+    [self upLoadImageWith:[self scaleImage:image ToWidth:0] isNow:NO];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
-- (void)textFieldDidEndEditing:(UITextField *)textField
+
+// 设置上传图片尺寸大小 最大边长
+- (UIImage *)scaleImage:(UIImage *)sourceImage ToWidth:(CGFloat)width
 {
-    self.wkTitle = textField.text;
+    // 如果传入的宽度比当前宽度还要大,就直接返回
+    if (width == 0) {
+        return sourceImage;
+    }else if (width > sourceImage.size.width) {
+        return  sourceImage;
+    }
+    CGFloat widthFactor = width / sourceImage.size.width;
+    CGFloat heightFactor = width / sourceImage.size.height;
+    CGFloat scaleFactor = 0.0;  // 比例
+    if (widthFactor >= heightFactor) {
+        scaleFactor = heightFactor;
+    }else {
+        scaleFactor = widthFactor;
+    }
+    // 初始化要画的大小
+    CGRect  rect = CGRectMake(0, 0, scaleFactor*sourceImage.size.width, scaleFactor*sourceImage.size.height);
+    // 1. 开启图形上下文
+    UIGraphicsBeginImageContext(rect.size);
+    // 2. 画到上下文中 (会把当前image里面的所有内容都画到上下文)
+    [sourceImage drawInRect:rect];
+    // 3. 取到图片
+    UIImage * image = UIGraphicsGetImageFromCurrentImageContext();
+    // 4. 关闭上下文
+    UIGraphicsEndImageContext();
+    // 5. 返回
+    return image;
+}
+
+// 上传图片 分为现场照片和附件       true -> 现场照片
+- (void)upLoadImageWith:(UIImage *)image isNow:(BOOL)isNow
+{
+    NSString *url = @"";
+    NSData *data = UIImageJPEGRepresentation(image, 0.5);
+    if (isNow) {
+        url = [NSString stringWithFormat:@"%@/uploadFile/saveFiles?num=1",intranetURL];
+    }else {
+        url = [NSString stringWithFormat:@"%@/uploadFile/saveFile?num=1",intranetURL];
+    }
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyyMMddHHmmss"];
+    NSString *imageDate = [formatter stringFromDate:[NSDate date]];
+    
+    self.manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    
+    [self.manager POST:url parameters:nil constructingBodyWithBlock:^(id<AFMultipartFormData>  _Nonnull formData) {
+        [formData appendPartWithFileData:data name:isNow ? @"fileList":@"files" fileName:[NSString stringWithFormat:@"%@.jpg",imageDate] mimeType:@"image/jpg"];
+    } progress:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        
+        for (NSDictionary *dic in responseObject[@"rows"]) {
+            ApproveEnclosureModel *model = [[ApproveEnclosureModel alloc] init];
+            [model setValuesForKeysWithDictionary:dic];
+            if (isNow) {
+                // 现场图片
+                [self.upNowPhotos addObject:model];
+            }else { // 附件图片
+                [self.stepPhotoArr addObject:model];
+            }
+        }
+        if ([responseObject[@"status"] isEqualToString:@"yes"]) {
+            [self showAlertControllerMessage:@"上传成功" andTitle:@"提示" andIsReturn:NO];
+            if (isNow) {
+                [self.weeklyTable reloadSections:[NSIndexSet indexSetWithIndex:11] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }else {
+                [self.weeklyTable reloadSections:[NSIndexSet indexSetWithIndex:9] withRowAnimation:UITableViewRowAnimationAutomatic];
+            }
+        }else {
+            [self showAlertControllerMessage:@"上传失败,网络错误" andTitle:@"提示" andIsReturn:NO];
+        }
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        [self showAlertControllerMessage:@"上传失败" andTitle:@"提示" andIsReturn:NO];
+    }];
+}
+
+#pragma mark --UITextFieldDelegate--
+- (void)passLeaveDaysCellWithText:(NSString *)text
+{
+    self.wkTitle = text;
     [self.user setObject:self.wkTitle forKey:@"wkTitle"];
 }
 #pragma mark --passReasonWithTag--
@@ -742,8 +886,6 @@
     if (self.isPJT != 3) {
         [self.weeklyTable reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
-    
-    
 }
 
 // 显示

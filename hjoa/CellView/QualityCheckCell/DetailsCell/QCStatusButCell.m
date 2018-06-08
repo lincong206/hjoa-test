@@ -22,9 +22,9 @@
     [super awakeFromNib];
     // Initialization code
     
-    
 }
 
+// 初始化添加按钮
 - (void)loadQCStatusFromState:(NSString *)state andUserEnabled:(BOOL)abled
 {
     _width = (kscreenWidth - (self.butName.count+1)*20)/self.butName.count;
@@ -42,11 +42,8 @@
         but.userInteractionEnabled = abled;
         [but addTarget:self action:@selector(clickBut:) forControlEvents:UIControlEventTouchUpInside];
         [self.contentView addSubview:but];
-        
-        if (abled) {
-            
-        }else {
-            
+    
+        if (state || !abled) {
             if (but.tag == state.integerValue + 100) {
                 // 显示背景色
                 switch (state.integerValue) {
@@ -64,11 +61,11 @@
                         break;
                 }
             }
-            
         }
     }
 }
 
+// 点击
 - (void)clickBut:(UIButton *)sender
 {
     for (int i = 0; i < self.butName.count; i ++) {

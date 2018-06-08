@@ -385,7 +385,7 @@
 - (void)passHeightFromLeaveCell:(CGFloat)height
 {
     _approveCellHeight = height;
-    [self.ccTab reloadSections:[NSIndexSet indexSetWithIndex:6] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.ccTab reloadSections:[NSIndexSet indexSetWithIndex:5] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

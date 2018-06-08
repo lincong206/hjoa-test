@@ -650,7 +650,7 @@
     }else {
         _apCellHeight = height - 50;
     }
-    [self.checkTable reloadSections:[NSIndexSet indexSetWithIndex:6] withRowAnimation:UITableViewRowAnimationAutomatic];
+    [self.checkTable reloadSections:[NSIndexSet indexSetWithIndex:7] withRowAnimation:UITableViewRowAnimationAutomatic];
 }
 - (void)passStepDataFormLeaveCellWithStepData:(NSMutableArray *)step
 {

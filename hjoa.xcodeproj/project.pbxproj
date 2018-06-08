@@ -90,6 +90,14 @@
 		C22B4808209C62E8007CA1E7 /* qc_noPass.png in Resources */ = {isa = PBXBuildFile; fileRef = C22B4806209C62E8007CA1E7 /* qc_noPass.png */; };
 		C2328C631FE3B91E00000CF1 /* DocDownCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C2328C611FE3B91E00000CF1 /* DocDownCell.m */; };
 		C2328C641FE3B91E00000CF1 /* DocDownCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C2328C621FE3B91E00000CF1 /* DocDownCell.xib */; };
+		C239335720C777FA00B7EA57 /* SPListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C239335520C777FA00B7EA57 /* SPListCell.m */; };
+		C239335820C777FA00B7EA57 /* SPListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C239335620C777FA00B7EA57 /* SPListCell.xib */; };
+		C23933BF20C8FDBD00B7EA57 /* LWHTModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C23933BE20C8FDBD00B7EA57 /* LWHTModel.m */; };
+		C23933C320C8FFB800B7EA57 /* LWHTCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C23933C120C8FFB800B7EA57 /* LWHTCell.m */; };
+		C23933C420C8FFB800B7EA57 /* LWHTCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C23933C220C8FFB800B7EA57 /* LWHTCell.xib */; };
+		C23933C820C9073000B7EA57 /* NKDJCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C23933C620C9073000B7EA57 /* NKDJCell.m */; };
+		C23933C920C9073000B7EA57 /* NKDJCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C23933C720C9073000B7EA57 /* NKDJCell.xib */; };
+		C23933CC20C907A100B7EA57 /* NKDJModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C23933CB20C907A100B7EA57 /* NKDJModel.m */; };
 		C239E4D21E973453003E00BA /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C239E4D11E973453003E00BA /* WelcomeViewController.m */; };
 		C239E4D61E97424F003E00BA /* welcome1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C239E4D31E97424F003E00BA /* welcome1.jpg */; };
 		C239E4D71E97424F003E00BA /* welcome2.jpg in Resources */ = {isa = PBXBuildFile; fileRef = C239E4D41E97424F003E00BA /* welcome2.jpg */; };
@@ -117,6 +125,22 @@
 		C23A3CFF1F18C60600A55FA0 /* QJSQModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C23A3CFE1F18C60600A55FA0 /* QJSQModel.m */; };
 		C23CAE141E8B3FAC00F624C3 /* BaiduMapAPI_Search.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C23CAE131E8B3FAC00F624C3 /* BaiduMapAPI_Search.framework */; };
 		C23CAE161E8B3FBB00F624C3 /* BaiduMapAPI_Cloud.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C23CAE151E8B3FBB00F624C3 /* BaiduMapAPI_Cloud.framework */; };
+		C23D2C1020C61E9900FD5B98 /* LWJDKModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C23D2C0F20C61E9900FD5B98 /* LWJDKModel.m */; };
+		C23D2C1420C6216C00FD5B98 /* LWJDKCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C23D2C1220C6216C00FD5B98 /* LWJDKCell.m */; };
+		C23D2C1520C6216C00FD5B98 /* LWJDKCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C23D2C1320C6216C00FD5B98 /* LWJDKCell.xib */; };
+		C23D2C1920C6268500FD5B98 /* LWJSKCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C23D2C1720C6268500FD5B98 /* LWJSKCell.m */; };
+		C23D2C1A20C6268500FD5B98 /* LWJSKCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C23D2C1820C6268500FD5B98 /* LWJSKCell.xib */; };
+		C23D2C1D20C6270A00FD5B98 /* LWJSKModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C23D2C1C20C6270A00FD5B98 /* LWJSKModel.m */; };
+		C23D2C2020C6411900FD5B98 /* KPModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C23D2C1F20C6411900FD5B98 /* KPModel.m */; };
+		C23D2C2320C6412B00FD5B98 /* SPModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C23D2C2220C6412B00FD5B98 /* SPModel.m */; };
+		C23D2C2720C6415500FD5B98 /* KPCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C23D2C2520C6415500FD5B98 /* KPCell.m */; };
+		C23D2C2820C6415500FD5B98 /* KPCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C23D2C2620C6415500FD5B98 /* KPCell.xib */; };
+		C23D2C2C20C6416A00FD5B98 /* SPCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C23D2C2A20C6416A00FD5B98 /* SPCell.m */; };
+		C23D2C2D20C6416A00FD5B98 /* SPCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C23D2C2B20C6416A00FD5B98 /* SPCell.xib */; };
+		C23D2C3920C6743F00FD5B98 /* KPListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = C23D2C3720C6743F00FD5B98 /* KPListCell.m */; };
+		C23D2C3A20C6743F00FD5B98 /* KPListCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C23D2C3820C6743F00FD5B98 /* KPListCell.xib */; };
+		C23D2C3D20C6824300FD5B98 /* KPListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C23D2C3C20C6824300FD5B98 /* KPListModel.m */; };
+		C23D2C4020C689D100FD5B98 /* SPListModel.m in Sources */ = {isa = PBXBuildFile; fileRef = C23D2C3F20C689D100FD5B98 /* SPListModel.m */; };
 		C23EAE3820B407C800A9D4FD /* Tools.m in Sources */ = {isa = PBXBuildFile; fileRef = C23EAE3720B407C800A9D4FD /* Tools.m */; };
 		C24681241E7A382900A316F8 /* AFNetworkActivityIndicatorManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C24681141E7A382900A316F8 /* AFNetworkActivityIndicatorManager.m */; };
 		C24681251E7A382900A316F8 /* UIActivityIndicatorView+AFNetworking.m in Sources */ = {isa = PBXBuildFile; fileRef = C24681161E7A382900A316F8 /* UIActivityIndicatorView+AFNetworking.m */; };
@@ -870,6 +894,19 @@
 		C2328C601FE3B91E00000CF1 /* DocDownCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DocDownCell.h; sourceTree = "<group>"; };
 		C2328C611FE3B91E00000CF1 /* DocDownCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DocDownCell.m; sourceTree = "<group>"; };
 		C2328C621FE3B91E00000CF1 /* DocDownCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DocDownCell.xib; sourceTree = "<group>"; };
+		C239335420C777FA00B7EA57 /* SPListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPListCell.h; sourceTree = "<group>"; };
+		C239335520C777FA00B7EA57 /* SPListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPListCell.m; sourceTree = "<group>"; };
+		C239335620C777FA00B7EA57 /* SPListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SPListCell.xib; sourceTree = "<group>"; };
+		C23933BD20C8FDBD00B7EA57 /* LWHTModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHTModel.h; sourceTree = "<group>"; };
+		C23933BE20C8FDBD00B7EA57 /* LWHTModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHTModel.m; sourceTree = "<group>"; };
+		C23933C020C8FFB800B7EA57 /* LWHTCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWHTCell.h; sourceTree = "<group>"; };
+		C23933C120C8FFB800B7EA57 /* LWHTCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWHTCell.m; sourceTree = "<group>"; };
+		C23933C220C8FFB800B7EA57 /* LWHTCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LWHTCell.xib; sourceTree = "<group>"; };
+		C23933C520C9073000B7EA57 /* NKDJCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NKDJCell.h; sourceTree = "<group>"; };
+		C23933C620C9073000B7EA57 /* NKDJCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NKDJCell.m; sourceTree = "<group>"; };
+		C23933C720C9073000B7EA57 /* NKDJCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NKDJCell.xib; sourceTree = "<group>"; };
+		C23933CA20C907A100B7EA57 /* NKDJModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NKDJModel.h; sourceTree = "<group>"; };
+		C23933CB20C907A100B7EA57 /* NKDJModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NKDJModel.m; sourceTree = "<group>"; };
 		C239E4D01E973453003E00BA /* WelcomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = WelcomeViewController.h; path = CustomView/WelcomeViewController.h; sourceTree = "<group>"; };
 		C239E4D11E973453003E00BA /* WelcomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = WelcomeViewController.m; path = CustomView/WelcomeViewController.m; sourceTree = "<group>"; };
 		C239E4D31E97424F003E00BA /* welcome1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = welcome1.jpg; sourceTree = "<group>"; };
@@ -910,6 +947,33 @@
 		C23CAE131E8B3FAC00F624C3 /* BaiduMapAPI_Search.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI_Search.framework; sourceTree = "<group>"; };
 		C23CAE151E8B3FBB00F624C3 /* BaiduMapAPI_Cloud.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = BaiduMapAPI_Cloud.framework; sourceTree = "<group>"; };
 		C23D29281E80B1640011BE74 /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
+		C23D2C0E20C61E9900FD5B98 /* LWJDKModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWJDKModel.h; sourceTree = "<group>"; };
+		C23D2C0F20C61E9900FD5B98 /* LWJDKModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWJDKModel.m; sourceTree = "<group>"; };
+		C23D2C1120C6216C00FD5B98 /* LWJDKCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWJDKCell.h; sourceTree = "<group>"; };
+		C23D2C1220C6216C00FD5B98 /* LWJDKCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWJDKCell.m; sourceTree = "<group>"; };
+		C23D2C1320C6216C00FD5B98 /* LWJDKCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LWJDKCell.xib; sourceTree = "<group>"; };
+		C23D2C1620C6268500FD5B98 /* LWJSKCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWJSKCell.h; sourceTree = "<group>"; };
+		C23D2C1720C6268500FD5B98 /* LWJSKCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWJSKCell.m; sourceTree = "<group>"; };
+		C23D2C1820C6268500FD5B98 /* LWJSKCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LWJSKCell.xib; sourceTree = "<group>"; };
+		C23D2C1B20C6270A00FD5B98 /* LWJSKModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LWJSKModel.h; sourceTree = "<group>"; };
+		C23D2C1C20C6270A00FD5B98 /* LWJSKModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LWJSKModel.m; sourceTree = "<group>"; };
+		C23D2C1E20C6411900FD5B98 /* KPModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KPModel.h; sourceTree = "<group>"; };
+		C23D2C1F20C6411900FD5B98 /* KPModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KPModel.m; sourceTree = "<group>"; };
+		C23D2C2120C6412B00FD5B98 /* SPModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPModel.h; sourceTree = "<group>"; };
+		C23D2C2220C6412B00FD5B98 /* SPModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPModel.m; sourceTree = "<group>"; };
+		C23D2C2420C6415500FD5B98 /* KPCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KPCell.h; sourceTree = "<group>"; };
+		C23D2C2520C6415500FD5B98 /* KPCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KPCell.m; sourceTree = "<group>"; };
+		C23D2C2620C6415500FD5B98 /* KPCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KPCell.xib; sourceTree = "<group>"; };
+		C23D2C2920C6416A00FD5B98 /* SPCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPCell.h; sourceTree = "<group>"; };
+		C23D2C2A20C6416A00FD5B98 /* SPCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPCell.m; sourceTree = "<group>"; };
+		C23D2C2B20C6416A00FD5B98 /* SPCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SPCell.xib; sourceTree = "<group>"; };
+		C23D2C3620C6743F00FD5B98 /* KPListCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KPListCell.h; sourceTree = "<group>"; };
+		C23D2C3720C6743F00FD5B98 /* KPListCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KPListCell.m; sourceTree = "<group>"; };
+		C23D2C3820C6743F00FD5B98 /* KPListCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KPListCell.xib; sourceTree = "<group>"; };
+		C23D2C3B20C6824300FD5B98 /* KPListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KPListModel.h; sourceTree = "<group>"; };
+		C23D2C3C20C6824300FD5B98 /* KPListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KPListModel.m; sourceTree = "<group>"; };
+		C23D2C3E20C689D100FD5B98 /* SPListModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SPListModel.h; sourceTree = "<group>"; };
+		C23D2C3F20C689D100FD5B98 /* SPListModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SPListModel.m; sourceTree = "<group>"; };
 		C23EAE3620B407C800A9D4FD /* Tools.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Tools.h; sourceTree = "<group>"; };
 		C23EAE3720B407C800A9D4FD /* Tools.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Tools.m; sourceTree = "<group>"; };
 		C24681131E7A382900A316F8 /* AFNetworkActivityIndicatorManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFNetworkActivityIndicatorManager.h; sourceTree = "<group>"; };
@@ -3268,6 +3332,27 @@
 				C25EF78E20637D8E0073C71A /* YCGZCell.h */,
 				C25EF78F20637D8E0073C71A /* YCGZCell.m */,
 				C25EF79020637D8E0073C71A /* YCGZCell.xib */,
+				C23D2C1120C6216C00FD5B98 /* LWJDKCell.h */,
+				C23D2C1220C6216C00FD5B98 /* LWJDKCell.m */,
+				C23D2C1320C6216C00FD5B98 /* LWJDKCell.xib */,
+				C23D2C1620C6268500FD5B98 /* LWJSKCell.h */,
+				C23D2C1720C6268500FD5B98 /* LWJSKCell.m */,
+				C23D2C1820C6268500FD5B98 /* LWJSKCell.xib */,
+				C23D2C2420C6415500FD5B98 /* KPCell.h */,
+				C23D2C2520C6415500FD5B98 /* KPCell.m */,
+				C23D2C2620C6415500FD5B98 /* KPCell.xib */,
+				C23D2C3620C6743F00FD5B98 /* KPListCell.h */,
+				C23D2C3720C6743F00FD5B98 /* KPListCell.m */,
+				C23D2C3820C6743F00FD5B98 /* KPListCell.xib */,
+				C23D2C2920C6416A00FD5B98 /* SPCell.h */,
+				C23D2C2A20C6416A00FD5B98 /* SPCell.m */,
+				C23D2C2B20C6416A00FD5B98 /* SPCell.xib */,
+				C239335420C777FA00B7EA57 /* SPListCell.h */,
+				C239335520C777FA00B7EA57 /* SPListCell.m */,
+				C239335620C777FA00B7EA57 /* SPListCell.xib */,
+				C23933C520C9073000B7EA57 /* NKDJCell.h */,
+				C23933C620C9073000B7EA57 /* NKDJCell.m */,
+				C23933C720C9073000B7EA57 /* NKDJCell.xib */,
 			);
 			path = xmgkCell;
 			sourceTree = "<group>";
@@ -3834,6 +3919,9 @@
 				C2D5EFCA20B25EB100CB09F9 /* LWFBHTCell.h */,
 				C2D5EFCB20B25EB100CB09F9 /* LWFBHTCell.m */,
 				C2D5EFCC20B25EB100CB09F9 /* LWFBHTCell.xib */,
+				C23933C020C8FFB800B7EA57 /* LWHTCell.h */,
+				C23933C120C8FFB800B7EA57 /* LWHTCell.m */,
+				C23933C220C8FFB800B7EA57 /* LWHTCell.xib */,
 			);
 			path = otherCell;
 			sourceTree = "<group>";
@@ -3865,6 +3953,22 @@
 				C25EF78C2063791B0073C71A /* YCGZModel.m */,
 				C2D5EFC720B25E0800CB09F9 /* LWFBHTModel.h */,
 				C2D5EFC820B25E0800CB09F9 /* LWFBHTModel.m */,
+				C23933BD20C8FDBD00B7EA57 /* LWHTModel.h */,
+				C23933BE20C8FDBD00B7EA57 /* LWHTModel.m */,
+				C23D2C0E20C61E9900FD5B98 /* LWJDKModel.h */,
+				C23D2C0F20C61E9900FD5B98 /* LWJDKModel.m */,
+				C23D2C1B20C6270A00FD5B98 /* LWJSKModel.h */,
+				C23D2C1C20C6270A00FD5B98 /* LWJSKModel.m */,
+				C23D2C1E20C6411900FD5B98 /* KPModel.h */,
+				C23D2C1F20C6411900FD5B98 /* KPModel.m */,
+				C23D2C3B20C6824300FD5B98 /* KPListModel.h */,
+				C23D2C3C20C6824300FD5B98 /* KPListModel.m */,
+				C23D2C2120C6412B00FD5B98 /* SPModel.h */,
+				C23D2C2220C6412B00FD5B98 /* SPModel.m */,
+				C23D2C3E20C689D100FD5B98 /* SPListModel.h */,
+				C23D2C3F20C689D100FD5B98 /* SPListModel.m */,
+				C23933CA20C907A100B7EA57 /* NKDJModel.h */,
+				C23933CB20C907A100B7EA57 /* NKDJModel.m */,
 			);
 			path = otherModel;
 			sourceTree = "<group>";
@@ -4092,18 +4196,21 @@
 				C2F54E191FB4394A0003BE92 /* RecordDetailedCell.xib in Resources */,
 				C2541FF11F3BF3B8008533D4 /* XMBZJCell.xib in Resources */,
 				C2541FE51F3BF3B8008533D4 /* TTBBZJCell.xib in Resources */,
+				C23D2C3A20C6743F00FD5B98 /* KPListCell.xib in Resources */,
 				C29FD4FB1F41740E00B6844A /* FWGZCell.xib in Resources */,
 				C247A0A61EF759C4000E181E /* LaunchScreen.storyboard in Resources */,
 				C29707971EE7AA08009B1EEA /* telephone.png in Resources */,
 				C247A10D1EFC9B04000E181E /* comwork_music.png in Resources */,
 				C22134B41FA1882500C58954 /* tabbar_news.png in Resources */,
 				C22B4808209C62E8007CA1E7 /* qc_noPass.png in Resources */,
+				C23933C920C9073000B7EA57 /* NKDJCell.xib in Resources */,
 				C254207E1F3BF578008533D4 /* YZHSCell.xib in Resources */,
 				C24FE2D82046AB2000353D8D /* qc_xz.png in Resources */,
 				C22134861F9DD51700C58954 /* RecordNewsCell.xib in Resources */,
 				C24FE2C9204693F600353D8D /* QCResultCell.xib in Resources */,
 				C2328C641FE3B91E00000CF1 /* DocDownCell.xib in Resources */,
 				C2541FED1F3BF3B8008533D4 /* XMBX.xib in Resources */,
+				C239335820C777FA00B7EA57 /* SPListCell.xib in Resources */,
 				C2541FEF1F3BF3B8008533D4 /* XMBXCell.xib in Resources */,
 				C25420511F3BF4DB008533D4 /* PXSPCell.xib in Resources */,
 				C206889D1F7C912B00B4C437 /* record_outside.png in Resources */,
@@ -4152,6 +4259,7 @@
 				C250002B1FCE8D2700D2AC21 /* count1.png in Resources */,
 				C2BAB96D1F5944FA0058C64F /* YHKHCell.xib in Resources */,
 				C26C17AF208764D600FFA48C /* ReplyButCell.xib in Resources */,
+				C23D2C2820C6415500FD5B98 /* KPCell.xib in Resources */,
 				C265FE771FBAC92300B00A1F /* CalenderPMRecordCell.xib in Resources */,
 				C29FD4F21F4147FC00B6844A /* ZBCell.xib in Resources */,
 				C246825E1E7A921800A316F8 /* MJRefresh.bundle in Resources */,
@@ -4167,6 +4275,7 @@
 				C22134AA1FA1882500C58954 /* tabbar_address.png in Resources */,
 				C2541FFF1F3BF3B8008533D4 /* YBJKSQCell.xib in Resources */,
 				C265FE7E1FBBE91400B00A1F /* CalenderCollectionCell.xib in Resources */,
+				C23D2C2D20C6416A00FD5B98 /* SPCell.xib in Resources */,
 				C24FE2DA2046AB2000353D8D /* qc_check.png in Resources */,
 				C21009AB1FB188EB0079AAB8 /* RecordListCell.xib in Resources */,
 				C22134AB1FA1882500C58954 /* tabbar_address_press.png in Resources */,
@@ -4224,6 +4333,8 @@
 				C27E63D61F9846FB00FD78AA /* CalenderRecordsCell.xib in Resources */,
 				C29FD5061F42D67200B6844A /* work_0_0.png in Resources */,
 				C25420071F3BF3B8008533D4 /* HQDForRepaymentCell.xib in Resources */,
+				C23D2C1A20C6268500FD5B98 /* LWJSKCell.xib in Resources */,
+				C23D2C1520C6216C00FD5B98 /* LWJDKCell.xib in Resources */,
 				C29005F11F1DB8A1003E222E /* LeadCell.xib in Resources */,
 				C24FE2E32046AB3A00353D8D /* qc_status_0.png in Resources */,
 				C25000301FCE8D2700D2AC21 /* setting1.png in Resources */,
@@ -4312,6 +4423,7 @@
 				C29FD5081F42D67200B6844A /* work_2_1.png in Resources */,
 				C22134B71FA1882500C58954 /* tabbar_office_press@2x.png in Resources */,
 				C25420031F3BF3B8008533D4 /* BFHQDCell.xib in Resources */,
+				C23933C420C8FFB800B7EA57 /* LWHTCell.xib in Resources */,
 				C247A09D1EF3C0C6000E181E /* secure.png in Resources */,
 				C28CCB761FAAFB2E0004E2D5 /* DataRecordListCell.xib in Resources */,
 				C29707961EE7AA08009B1EEA /* person.png in Resources */,
@@ -4393,6 +4505,7 @@
 				C246826E1E7A921800A316F8 /* SDWebImageManager.m in Sources */,
 				C24682681E7A921800A316F8 /* SDImageCache.m in Sources */,
 				C254204B1F3BF4CD008533D4 /* MPCell.m in Sources */,
+				C23D2C2C20C6416A00FD5B98 /* SPCell.m in Sources */,
 				C25420121F3BF3B8008533D4 /* LWFKCell.m in Sources */,
 				C28BCA291F4BDE0000ED0C91 /* XMYSModel.m in Sources */,
 				C2D688981F25E8D50049337C /* SubmitView.m in Sources */,
@@ -4410,6 +4523,7 @@
 				C2541E061F3AB623008533D4 /* GCYWCCModel.m in Sources */,
 				C2541E3C1F3AB72C008533D4 /* YZWCModel.m in Sources */,
 				C24682571E7A921800A316F8 /* MJRefreshAutoStateFooter.m in Sources */,
+				C239335720C777FA00B7EA57 /* SPListCell.m in Sources */,
 				C2541E8C1F3ABA4A008533D4 /* SGModel.m in Sources */,
 				C2541E0C1F3AB641008533D4 /* IDZKModel.m in Sources */,
 				C28CCB6B1FA9A8250004E2D5 /* DataCountModel.m in Sources */,
@@ -4429,6 +4543,7 @@
 				C2541E4D1F3AB86D008533D4 /* JKBXModel.m in Sources */,
 				C26C17992086ED1A00FFA48C /* QRDetailsCell.m in Sources */,
 				C20BBFB81E7BDFD90061F955 /* BMChineseSort.m in Sources */,
+				C23D2C1020C61E9900FD5B98 /* LWJDKModel.m in Sources */,
 				C26CE82D1FE900160020B389 /* DocManagerApplyViewController.m in Sources */,
 				C247A1181EFD0A26000E181E /* ScheduleViewController.m in Sources */,
 				C2541E4C1F3AB86D008533D4 /* BFHQDModel.m in Sources */,
@@ -4457,6 +4572,7 @@
 				C24682951E7A92E100A316F8 /* JSONModel+networking.m in Sources */,
 				C29FD4F61F41482C00B6844A /* ZBModel.m in Sources */,
 				C2541FF01F3BF3B8008533D4 /* XMBZJCell.m in Sources */,
+				C23933CC20C907A100B7EA57 /* NKDJModel.m in Sources */,
 				C29506D51FAD581E009BA81A /* MonthRecordDataListViewController.m in Sources */,
 				C27E63CB1F98441600FD78AA /* CalenderPersonCell.m in Sources */,
 				C2551B632085A94A00E01537 /* QCChangeCell.m in Sources */,
@@ -4516,6 +4632,7 @@
 				C28BCA3D1F4D5F6500ED0C91 /* BCHT.m in Sources */,
 				C29005E11F1C94B6003E222E /* ApproveEnclosureModel.m in Sources */,
 				C25E23EE2047D6370070B1FE /* PhotosCollectionCell.m in Sources */,
+				C23D2C2020C6411900FD5B98 /* KPModel.m in Sources */,
 				C2541E501F3AB86D008533D4 /* LWandCLModel.m in Sources */,
 				C254201E1F3BF422008533D4 /* CFSPCell.m in Sources */,
 				C27E63C21F95EEF600FD78AA /* QFDatePickerView.m in Sources */,
@@ -4535,6 +4652,7 @@
 				C2541E891F3ABA4A008533D4 /* HTYYModel.m in Sources */,
 				C27E63E31F989D8A00FD78AA /* MonthCalenderModel.m in Sources */,
 				C246812A1E7A382900A316F8 /* UIRefreshControl+AFNetworking.m in Sources */,
+				C23933C320C8FFB800B7EA57 /* LWHTCell.m in Sources */,
 				C25F00FE1F468D18009DCA01 /* HYJYCell.m in Sources */,
 				C28BCA301F4D1DCA00ED0C91 /* HTBGCell.m in Sources */,
 				C2541E971F3ABA4A008533D4 /* XMFZRModel.m in Sources */,
@@ -4557,6 +4675,7 @@
 				C27E63BE1F944BCB00FD78AA /* ApplyRecordsViewController.m in Sources */,
 				C24682701E7A921800A316F8 /* UIButton+WebCache.m in Sources */,
 				C2541FD41F3BF3B8008533D4 /* HTYYCell.m in Sources */,
+				C23D2C2320C6412B00FD5B98 /* SPModel.m in Sources */,
 				C28CCB7F1FAC012D0004E2D5 /* MonthDataCell.m in Sources */,
 				C2E5C24E1FBD7C0900C36AE1 /* RecordSettingViewController.m in Sources */,
 				C2541E8F1F3ABA4A008533D4 /* TBBHAndXMBHModel.m in Sources */,
@@ -4566,9 +4685,11 @@
 				C25882091EB2C69C000C2995 /* ClickApproveViewController.m in Sources */,
 				C21404A81E812E670002490E /* FMDatabaseQueue.m in Sources */,
 				C28BCA211F4BBCB800ED0C91 /* CGHTModel.m in Sources */,
+				C23933BF20C8FDBD00B7EA57 /* LWHTModel.m in Sources */,
 				C2541E9D1F3ABA4A008533D4 /* YBJKSQModel.m in Sources */,
 				C25BFF021E836710006F9C09 /* PersonViewController.m in Sources */,
 				C29006011F1EDE45003E222E /* WeeklyViewController.m in Sources */,
+				C23D2C3D20C6824300FD5B98 /* KPListModel.m in Sources */,
 				C298C2501FDA6C9D008B4427 /* PhotosCollectionViewCell.m in Sources */,
 				C2541E9E1F3ABA4A008533D4 /* ZMSModel.m in Sources */,
 				C23A3CDC1F15CBFE00A55FA0 /* LeaveDaysCell.m in Sources */,
@@ -4606,6 +4727,7 @@
 				C2AEAB191F2ADDF2006B667D /* OfficeHeaderView.m in Sources */,
 				C2541FCE1F3BF3B8008533D4 /* BSJJCell.m in Sources */,
 				C25420021F3BF3B8008533D4 /* BFHQDCell.m in Sources */,
+				C23D2C4020C689D100FD5B98 /* SPListModel.m in Sources */,
 				C2BAB96C1F5944FA0058C64F /* YHKHCell.m in Sources */,
 				C21404A61E812E670002490E /* FMDatabaseAdditions.m in Sources */,
 				C25420551F3BF4E9008533D4 /* QJCell.m in Sources */,
@@ -4623,6 +4745,7 @@
 				C254203C1F3BF494008533D4 /* JDCell.m in Sources */,
 				C2541E1E1F3AB69E008533D4 /* WPModel.m in Sources */,
 				C22134851F9DD51700C58954 /* RecordNewsCell.m in Sources */,
+				C23D2C1D20C6270A00FD5B98 /* LWJSKModel.m in Sources */,
 				C29FD4F11F4147FC00B6844A /* ZBCell.m in Sources */,
 				C24FE2C320467F7E00353D8D /* QCContentCell.m in Sources */,
 				C22134801F9DD51700C58954 /* AMRecordsCell.m in Sources */,
@@ -4685,6 +4808,7 @@
 				C29005EC1F1C94B6003E222E /* ScheduleModel.m in Sources */,
 				C22B188A204FB20E009FA6ED /* QCNatureViewController.m in Sources */,
 				C25E441E1FF1E631005AFF2C /* DAMCell.m in Sources */,
+				C23933C820C9073000B7EA57 /* NKDJCell.m in Sources */,
 				C22561131E79435E003A4B9B /* tabbarController.m in Sources */,
 				C254200A1F3BF3B8008533D4 /* JKSQCell.m in Sources */,
 				C24682761E7A921800A316F8 /* UIView+WebCache.m in Sources */,
@@ -4705,8 +4829,10 @@
 				C26C179D2086F09900FFA48C /* DRDetailsModel.m in Sources */,
 				C2541E961F3ABA4A008533D4 /* XMBZJModel.m in Sources */,
 				C298C24D1FDA69F0008B4427 /* PhotosViewController.m in Sources */,
+				C23D2C2720C6415500FD5B98 /* KPCell.m in Sources */,
 				C221348D1F9DF44400C58954 /* RegisterViewController.m in Sources */,
 				C29005E21F1C94B6003E222E /* ApproveProcedureModel.m in Sources */,
+				C23D2C1920C6268500FD5B98 /* LWJSKCell.m in Sources */,
 				C2541FD61F3BF3B8008533D4 /* JSXCell.m in Sources */,
 				C23A3CA61F15B1D200A55FA0 /* LeaveViewController.m in Sources */,
 				C298C2531FDA6FD9008B4427 /* PhotosModel.m in Sources */,
@@ -4732,6 +4858,7 @@
 				C21009A61FB165860079AAB8 /* RecordListModel.m in Sources */,
 				C24A95CE1F4EBE0200AB041B /* XMTBPSModel.m in Sources */,
 				C2541E911F3ABA4A008533D4 /* TTBBZJModel.m in Sources */,
+				C23D2C1420C6216C00FD5B98 /* LWJDKCell.m in Sources */,
 				C26A9B211E7BB286002828F6 /* AFHTTPRequestOperationManager.m in Sources */,
 				C25420231F3BF43E008533D4 /* ERPLCBGCell.m in Sources */,
 				C2541E8B1F3ABA4A008533D4 /* JYCWZLModel.m in Sources */,
@@ -4762,6 +4889,7 @@
 				C28BCA001F4A85E800ED0C91 /* ContentCell.m in Sources */,
 				C29282E9204CD4E80032DABC /* QCAddNewsCell.m in Sources */,
 				C2541E2D1F3AB6E8008533D4 /* JDModel.m in Sources */,
+				C23D2C3920C6743F00FD5B98 /* KPListCell.m in Sources */,
 				C254205F1F3BF512008533D4 /* RSXQCell.m in Sources */,
 				C206887D1F7A61FB00B4C437 /* CLLocationCell.m in Sources */,
 				C28BCA191F4AC4AB00ED0C91 /* CLFKModel.m in Sources */,
